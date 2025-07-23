@@ -1,32 +1,37 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using RISE.Models;
+using RISE.Data;
 
 namespace RISE.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var news = _context.News.OrderByDescending(n => n.PostedAt).Take(3).ToList();
+            return View(news);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Competitions()
+        {
+            var comps = _context.Competitions.OrderByDescending(c => c.Date).ToList();
+            return View(comps);
+        }
+
+        public IActionResult Rules()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Contact()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

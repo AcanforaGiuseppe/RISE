@@ -1,4 +1,10 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// Optional JS for future custom interactions
 
-// Write your JavaScript code.
+// Example: automatic carousel interval override (Bootstrap 5)
+var newsCarousel = document.querySelector('#newsCarousel');
+if (newsCarousel) {
+    var carousel = new bootstrap.Carousel(newsCarousel, {
+        interval: 5000,  // 5 seconds
+        ride: 'carousel'
+    });
+}

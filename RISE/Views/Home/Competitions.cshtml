@@ -1,0 +1,42 @@
+﻿@model List<RISE.Models.Competition>
+
+@{
+    ViewData["Title"] = "Competitions";
+}
+
+<div class="container mt-4">
+    <h2>Competitions History & Upcoming</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Results</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var comp in Model)
+            {
+                <tr>
+                    <td>@comp.Title</td>
+                    <td>@comp.Date.ToString("dd MMM yyyy")</td>
+                    <td>@comp.Location</td>
+                    <td>@comp.Description</td>
+                    <td>
+                        @if(!string.IsNullOrEmpty(comp.Results))
+                        {
+                            <a href="@comp.Results" target="_blank">View</a>
+                        }
+                        else
+                        {
+                            <em>Pending</em>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

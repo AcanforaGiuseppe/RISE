@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<RISE.Models.News>
+
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <h2>Latest News</h2>
+
+    <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @for(int i = 0; i < Model.Count; i++)
+            {
+                var news = Model[i];
+                <div class="carousel-item @(i == 0 ? "active" : "")">
+                    <div class="card p-4">
+                        <h3>@news.Title</h3>
+                        <p>@news.Content</p>
+                        <small>Posted on @news.PostedAt.ToString("dd MMM yyyy")</small>
+                    </div>
+                </div>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
 </div>

@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-4">
+    <h2>Welcome to Admin Dashboard</h2>
+
+    <ul>
+        <li><a asp-controller="Admin" asp-action="News">Manage News</a></li>
+        <!-- Extend with more admin features here -->
+    </ul>
+
+    <form method="post" asp-controller="Account" asp-action="Logout">
+        <button type="submit" class="btn btn-danger mt-3">Logout</button>
+    </form>
+</div>

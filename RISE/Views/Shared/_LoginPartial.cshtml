@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if(User.Identity != null && User.Identity.IsAuthenticated)
+{
+    <form method="post" asp-controller="Account" asp-action="Logout" id="logoutForm" class="navbar-right">
+        <button type="submit" class="btn btn-link text-light">Logout (@User.Identity.Name)</button>
+    </form>
+}
+else
+{
+    <a href="/Account/Login" class="text-light">Login</a>
+}
