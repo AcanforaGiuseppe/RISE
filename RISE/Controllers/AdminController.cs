@@ -66,5 +66,12 @@ namespace RISE.Controllers
 
             return RedirectToAction("News");
         }
+
+        public IActionResult Subscribers()
+        {
+            var list = _context.NewsletterSubscribers.OrderByDescending(x => x.SubscribedAt).ToList();
+            return View(list);
+        }
+
     }
 }

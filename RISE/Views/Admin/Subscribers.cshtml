@@ -1,0 +1,11 @@
+﻿@model List<RISE.Models.NewsletterSubscriber>
+<h2>Newsletter Subscribers</h2>
+<table class="table">
+    <thead><tr><th>Email</th><th>Date</th></tr></thead>
+    <tbody>
+        @foreach(var s in Model)
+        {
+            <tr><td>@s.Email</td><td>@s.SubscribedAt.ToString("g")</td></tr>
+        }
+    </tbody>
+</table>

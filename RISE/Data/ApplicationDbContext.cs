@@ -11,5 +11,6 @@ namespace RISE.Data
         public DbSet<Competition> Competitions { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<NewsletterSubscriber> NewsletterSubscribers { get; set; }
     }
 }

@@ -40,6 +40,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTmV3cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/acanf/Desktop/RISE/RISE/Views/Admin/Subscribers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3Vic2NyaWJlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/acanf/Desktop/RISE/RISE/Views/Home/Competitions.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb21wZXRpdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -75,3 +79,7 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/acanf/Desktop/RISE/RISE/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-6bf8y8i3uz
+
+[C:/Users/acanf/Desktop/RISE/RISE/Views/Shared/_NewsletterPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OZXdzbGV0dGVyUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-euu29o5wsb
