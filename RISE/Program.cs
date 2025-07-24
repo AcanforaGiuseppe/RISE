@@ -24,6 +24,7 @@ var app = builder.Build();
 using(var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
     if(!db.Users.Any())
     {
         db.Users.Add(new User
@@ -33,6 +34,9 @@ using(var scope = app.Services.CreateScope())
         });
         db.SaveChanges();
     }
+
+    // Seed FAQ entries
+    DbInitializer.Seed(db);
 }
 
 // Configure the HTTP request pipeline.

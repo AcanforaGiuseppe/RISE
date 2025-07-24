@@ -1,0 +1,61 @@
+﻿@model List<RISE.Models.FAQ>
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="mb-3">
+    <button id="expandAllBtn" class="btn btn-sm btn-primary me-2">Expand All</button>
+    <button id="collapseAllBtn" class="btn btn-sm btn-secondary">Collapse All</button>
+</div>
+
+<div class="faq-list">
+    @for(int i = 0; i < Model.Count; i++)
+    {
+        <div class="faq-item border rounded mb-2">
+            <div class="faq-question d-flex justify-content-between align-items-center p-2" style="cursor:pointer;" data-index="@i">
+                <span>@Model[i].Question</span>
+                <i class="fas fa-chevron-down" id="icon-@i"></i>
+            </div>
+            <div class="faq-answer p-3" id="answer-@i" style="display:none;">
+                @Model[i].Answer
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.faq-question').forEach(el => {
+            el.addEventListener('click', () => {
+                const i = el.getAttribute('data-index');
+                const answer = document.getElementById('answer-' + i);
+                const icon = document.getElementById('icon-' + i);
+
+                if (answer.style.display === 'none') {
+                    answer.style.display = 'block';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    answer.style.display = 'none';
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+
+        document.getElementById('expandAllBtn').addEventListener('click', () => {
+            document.querySelectorAll('.faq-answer').forEach(answer => answer.style.display = 'block');
+            document.querySelectorAll('.faq-question i').forEach(icon => {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            });
+        });
+
+        document.getElementById('collapseAllBtn').addEventListener('click', () => {
+            document.querySelectorAll('.faq-answer').forEach(answer => answer.style.display = 'none');
+            document.querySelectorAll('.faq-question i').forEach(icon => {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            });
+        });
+    </script>
+}
