@@ -2,6 +2,6 @@
 # Il file gitignore è stato creato automaticamente da Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/
-/RISE/obj/
-/RISE/bin/
+.vs/
+RISE/obj/
+RISE/bin/
