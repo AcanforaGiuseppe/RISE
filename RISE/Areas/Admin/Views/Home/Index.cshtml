@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<h2>Dashboard</h2>
+<div class="row g-3">
+    <div class="col-md-4"><div class="card p-3"><b>News</b><div>@ViewBag.NewsCount</div></div></div>
+    <div class="col-md-4"><div class="card p-3"><b>FAQ</b><div>@ViewBag.FAQCount</div></div></div>
+    <div class="col-md-4"><div class="card p-3"><b>Registrations</b><div>@ViewBag.RegistrationsCount</div></div></div>
+    <div class="col-md-4"><div class="card p-3"><b>Users</b><div>@ViewBag.UsersCount</div></div></div>
+    <div class="col-md-4"><div class="card p-3"><b>Subscribers</b><div>@ViewBag.SubscribersCount</div></div></div>
+    <div class="col-md-4"><div class="card p-3"><b>Content Blocks</b><div>@ViewBag.BlocksCount</div></div></div>
+</div>

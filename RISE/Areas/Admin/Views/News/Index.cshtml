@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@model List<RISE.Models.News>
+<h2>News</h2>
+<a class="btn btn-primary btn-sm mb-3" href="/Admin/News/Create">Create</a>
+<table class="table table-sm">
+    <thead><tr><th>Title</th><th>Date</th><th></th></tr></thead>
+    <tbody>
+        @foreach(var n in Model)
+        {
+            <tr>
+                <td>@n.Title</td>
+                <td>@n.PostedAt.ToString("g")</td>
+                <td class="text-end">
+                    <a class="btn btn-outline-secondary btn-sm" href="/Admin/News/Edit/@n.Id">Edit</a>
+                    <a class="btn btn-outline-danger btn-sm" href="/Admin/News/Delete/@n.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -13,5 +13,8 @@ namespace RISE.Data
         public DbSet<User> Users { get; set; }
         public DbSet<NewsletterSubscriber> NewsletterSubscribers { get; set; }
         public DbSet<FAQ> FAQs { get; set; }
+        public DbSet<Registration> Registrations { get; set; }
+        public DbSet<ContentBlock> ContentBlocks { get; set; }
+
     }
 }

@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Admin - RISE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/Admin">Admin Panel</a>
+            <ul class="navbar-nav flex-row">
+                <li class="nav-item me-3"><a class="nav-link text-light" href="/Admin/News">News</a></li>
+                <li class="nav-item me-3"><a class="nav-link text-light" href="/Admin/FAQ">FAQ</a></li>
+                <li class="nav-item me-3"><a class="nav-link text-light" href="/Admin/Competitions">Competitions</a></li>
+                <li class="nav-item me-3"><a class="nav-link text-light" href="/Admin/Users">Users</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="/">Torna al sito</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        @RenderBody()
+    </div>
+</body>
+</html>

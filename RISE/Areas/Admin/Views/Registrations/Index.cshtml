@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@model List<RISE.Models.Registration>
+<h2>Registrations</h2>
+<table class="table table-sm">
+    <thead><tr><th>Name</th><th>Email</th><th>Category</th><th>Date</th><th></th></tr></thead>
+    <tbody>
+        @foreach(var r in Model)
+        {
+            <tr>
+                <td>@r.ParticipantName</td>
+                <td>@r.Email</td>
+                <td>@r.Category</td>
+                <td>@r.RegisteredAt.ToString("g")</td>
+                <td class="text-end">
+                    <a class="btn btn-outline-danger btn-sm" href="/Admin/Registrations/Delete/@r.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,39 @@
+﻿@model List<RISE.Models.Registration>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2>Event Registrations</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Participant</th>
+            <th>Email</th>
+            <th>Competition</th>
+            <th>Registered At</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var r in Model)
+        {
+            <tr>
+                <td>@r.ParticipantName</td>
+                <td>@r.Email</td>
+                <td>@r.Competition.Title</td>
+                <td>@r.RegisteredAt.ToString("g")</td>
+                <td>@(r.Approved ? "Approved" : "Pending")</td>
+                <td>
+                    @if(!r.Approved)
+                    {
+                        <a class="btn btn-success btn-sm" href="/Admin/ApproveRegistration/@r.Id">Approve</a>
+                    }
+                    <a class="btn btn-danger btn-sm" href="/Admin/DeleteRegistration/@r.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

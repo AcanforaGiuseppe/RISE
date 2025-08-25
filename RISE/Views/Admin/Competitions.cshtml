@@ -1,0 +1,35 @@
+﻿@model IEnumerable<RISE.Models.Competition>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2>Competitions</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Results</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var comp in Model)
+        {
+            <tr>
+                <td>@comp.Title</td>
+                <td>@comp.Location</td>
+                <td>@comp.Date.ToString("dd/MM/yyyy")</td>
+                <td>@comp.Description</td>
+                <td>@(string.IsNullOrEmpty(comp.Results) ? "-" : comp.Results)</td>
+                <td>
+                    <a asp-action="EditCompetition" asp-route-id="@comp.Id" class="btn btn-sm btn-warning">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

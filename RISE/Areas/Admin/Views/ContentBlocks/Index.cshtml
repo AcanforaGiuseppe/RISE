@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model List<RISE.Models.ContentBlock>
+<h2>Content Blocks</h2>
+<a class="btn btn-primary btn-sm mb-3" href="/Admin/ContentBlocks/Create">Create</a>
+<table class="table table-sm">
+    <thead><tr><th>Key</th><th>Value</th><th></th></tr></thead>
+    <tbody>
+        @foreach(var b in Model)
+        {
+            <tr>
+                <td><code>@b.Key</code></td>
+                <td>@(b.Value?.Length > 80 ? b.Value.Substring(0, 80) + "..." : b.Value)</td>
+                <td class="text-end">
+                    <a class="btn btn-outline-secondary btn-sm" href="/Admin/ContentBlocks/Edit/@b.Id">Edit</a>
+                    <a class="btn btn-outline-danger btn-sm" href="/Admin/ContentBlocks/Delete/@b.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
