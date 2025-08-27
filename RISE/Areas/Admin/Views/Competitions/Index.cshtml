@@ -1,0 +1,38 @@
+﻿@model List<RISE.Models.Competition>
+
+@{
+    ViewData["Title"] = "Competitions";
+}
+
+<h2>Competitions</h2>
+<a class="btn btn-primary mb-3" href="@Url.Action("Create")">Create New</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var comp in Model)
+        {
+            <tr>
+                <td>@comp.Title</td>
+                <td>@comp.Location</td>
+                <td>@comp.Date.ToShortDateString()</td>
+                <td>@comp.Description</td>
+                <td>
+                    <a class="btn btn-sm btn-warning" href="@Url.Action("Edit", new { id = comp.Id })">Edit</a>
+                    <form asp-action="Delete" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@comp.Id" />
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

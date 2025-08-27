@@ -35,8 +35,12 @@
                                 <i class="fas fa-moon"></i>
                             </button>
                         </li>
+
                         @if(User.Identity != null && User.Identity.IsAuthenticated)
                         {
+                            <li class="nav-item me-2">
+                                <a class="btn btn-outline-info btn-sm" href="/Admin/Dashboard">Admin Dashboard</a>
+                            </li>
                             <li class="nav-item">
                                 <form method="post" asp-controller="Account" asp-action="Logout" class="d-inline">
                                     <button type="submit" class="btn btn-link nav-link">Logout</button>
