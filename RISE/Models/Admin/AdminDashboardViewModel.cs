@@ -1,4 +1,4 @@
-﻿namespace RISE.Models
+﻿namespace RISE.Models.Admin
 {
     public class AdminDashboardViewModel
     {
