@@ -1,0 +1,36 @@
+﻿@model List<RISE.Models.SocialPost>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Social Feed";
+}
+
+<h2>Social Feed</h2>
+
+<a class="btn btn-primary mb-3" href="/Admin/Social/Create">New Post</a>
+
+@if(!Model.Any())
+{
+    <p>No social posts yet.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Platform</th>
+                <th>Content</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var post in Model)
+            {
+                <tr>
+                    <td>@post.Platform</td>
+                    <td>@post.Content</td>
+                    <td>@post.PostedAt.ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

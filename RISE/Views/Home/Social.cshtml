@@ -1,0 +1,20 @@
+﻿@model List<RISE.Models.SocialPost>
+
+<h2 class="mb-4">Social Feed</h2>
+
+@foreach(var post in Model)
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <strong>@post.Platform</strong>
+            <p>@post.Content</p>
+
+            @if(!string.IsNullOrEmpty(post.ImageUrl))
+            {
+                <img src="@post.ImageUrl" class="img-fluid rounded mb-2" />
+            }
+
+            <small class="text-muted">@post.PostedAt.ToString("dd MMM yyyy")</small>
+        </div>
+    </div>
+}

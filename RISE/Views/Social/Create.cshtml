@@ -1,0 +1,31 @@
+﻿@model RISE.Models.SocialPost
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Create Social Post</h2>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-2">
+        <label>Platform</label>
+        <select asp-for="Platform" class="form-select">
+            <option>Instagram</option>
+            <option>Facebook</option>
+            <option>TikTok</option>
+        </select>
+    </div>
+
+    <div class="mb-2">
+        <label>Content</label>
+        <textarea asp-for="Content" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Image URL (optional)</label>
+        <input asp-for="ImageUrl" class="form-control" />
+    </div>
+
+    <button class="btn btn-success">Publish</button>
+</form>

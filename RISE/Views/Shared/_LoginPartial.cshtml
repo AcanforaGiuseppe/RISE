@@ -1,14 +1,28 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
-
-@if(User.Identity != null && User.Identity.IsAuthenticated)
+﻿@if(User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {
-    <form method="post" asp-controller="Account" asp-action="Logout" id="logoutForm" class="navbar-right">
-        <button type="submit" class="btn btn-link text-light">Logout (@User.Identity.Name)</button>
-    </form>
+    <li class="nav-item me-2">
+        <a class="btn btn-outline-info btn-sm"
+           href="/Admin/Dashboard">
+            Admin Dashboard
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <form method="post"
+              asp-controller="Account"
+              asp-action="Logout"
+              class="d-inline">
+            <button type="submit" class="btn btn-link nav-link">
+                Logout (@User.Identity.Name)
+            </button>
+        </form>
+    </li>
 }
 else
 {
-    <a href="/Account/Login" class="text-light">Login</a>
+    <li class="nav-item">
+        <a class="nav-link" href="/Account/AdminLogin">
+            Admin Login
+        </a>
+    </li>
 }
