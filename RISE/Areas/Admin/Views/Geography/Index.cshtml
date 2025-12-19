@@ -1,0 +1,24 @@
+﻿@model dynamic
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>User Geography</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Country</th>
+            <th>Registrations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.Country</td>
+                <td>@item.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>

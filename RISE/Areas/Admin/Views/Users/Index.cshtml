@@ -1,21 +1,39 @@
 ﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-
-
 @model List<RISE.Models.User>
+
 <h2>Users</h2>
-<a class="btn btn-primary btn-sm mb-3" href="/Admin/Users/Create">Create</a>
+
+<a class="btn btn-primary btn-sm mb-3" href="@Url.Action("Create", "Users", new { area = "Admin" })">Create</a>
+
+@if(TempData["Error"] != null)
+{
+    <div class="alert alert-warning">@TempData["Error"]</div>
+}
+
 <table class="table table-sm">
-    <thead><tr><th>Username</th><th></th></tr></thead>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th class="text-end"></th>
+        </tr>
+    </thead>
     <tbody>
         @foreach(var u in Model)
         {
             <tr>
                 <td>@u.Username</td>
+                <td>@u.Role</td>
                 <td class="text-end">
-                    <a class="btn btn-outline-secondary btn-sm" href="/Admin/Users/Edit/@u.Id">Edit</a>
-                    <a class="btn btn-outline-danger btn-sm" href="/Admin/Users/Delete/@u.Id">Delete</a>
+                    <a class="btn btn-outline-secondary btn-sm"
+                       href="@Url.Action("Edit", "Users", new { area = "Admin", id = u.Id })">Edit</a>
+
+                    <form method="post" asp-action="Delete" asp-route-id="@u.Id" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                    </form>
                 </td>
             </tr>
         }
