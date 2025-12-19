@@ -4,14 +4,6 @@ Sistema newsletter reale ? ?? al momento è solo simulato (salviamo nel DB), manc
 
 Sezione multilingua (IT/EN) ? ?? non ancora implementata, va attivato il sistema di localizzazione di ASP.NET Core e le risorse .resx.
 
-Dark/Light mode persistente ? ?? front-end da completare (toggle + salvataggio preferenza in cookie/localStorage).
-
-Admin panel completo ? ? quasi fatto: News, Competizioni, Iscrizioni, Newsletter, FAQ. Rimane da aggiungere la gestione utenti (Admin/User).
-
-Slider immagini automatico ? ?? non ancora fatto (home page ha solo galleria statica).
-
-Social feed dinamico ? ?? ancora mancante (va agganciato ad API di Instagram/Facebook/Twitter o simulato).
-
 Documentazione e README ? ?? ancora da scrivere.
 
 ?? In sintesi:
