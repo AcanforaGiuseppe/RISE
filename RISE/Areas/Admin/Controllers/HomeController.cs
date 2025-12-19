@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 using RISE.Models;
-using System.Linq;
+using RISE.Models.Admin;
 
 namespace RISE.Areas.Admin.Controllers
 {
