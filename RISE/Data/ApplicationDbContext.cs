@@ -15,6 +15,6 @@ namespace RISE.Data
         public DbSet<FAQ> FAQs { get; set; }
         public DbSet<Registration> Registrations { get; set; }
         public DbSet<ContentBlock> ContentBlocks { get; set; }
-
+        public DbSet<SocialPost> SocialPosts { get; set; }
     }
 }
