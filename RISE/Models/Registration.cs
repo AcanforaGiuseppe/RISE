@@ -1,28 +1,38 @@
-﻿namespace RISE.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace RISE.Models
 {
     public class Registration
     {
         public int Id { get; set; }
 
-        // Participant info
+        [Required]
         public string ParticipantName { get; set; } = string.Empty;
+
+        [Required, EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        // Geography
         public string Country { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
 
-        // Competition relation
+        [Required]
+        public string Category { get; set; } = string.Empty;
+
+        // ===== RELAZIONI =====
+
+        [Required]
         public int CompetitionId { get; set; }
-        public Competition Competition { get; set; } = null!;
 
-        // User relation (IMPORTANT for retention & stats)
-        public int UserId { get; set; }
-        public User User { get; set; } = null!;
+        [ForeignKey(nameof(CompetitionId))]
+        public Competition? Competition { get; set; }   // ✅ nullable
 
-        // Metadata
+        public int? UserId { get; set; }                  // ✅ nullable
+
+        [ForeignKey(nameof(UserId))]
+        public User? User { get; set; }                   // ✅ nullable
+
         public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
         public bool Approved { get; set; } = false;
-        public string Category { get; set; } = string.Empty;
     }
 }

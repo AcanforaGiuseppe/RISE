@@ -1,19 +1,50 @@
-﻿@{
+﻿@model List<RISE.Models.FAQ>
+@{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "FAQ Management";
 }
-@model List<RISE.Models.FAQ>
+
 <h2>FAQ</h2>
-<a class="btn btn-primary btn-sm mb-3" href="/Admin/FAQ/Create">Create</a>
-<table class="table table-sm">
-    <thead><tr><th>Question</th><th></th></tr></thead>
+
+<a class="btn btn-primary btn-sm mb-3"
+   href="@Url.Action("Create", "FAQ", new { area = "Admin" })">
+    Create FAQ
+</a>
+
+<table class="table table-sm align-middle">
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th class="text-end"></th>
+        </tr>
+    </thead>
     <tbody>
-        @foreach(var f in Model)
+        @foreach(var faq in Model)
         {
             <tr>
-                <td>@f.Question</td>
+                <td>@faq.Question</td>
                 <td class="text-end">
-                    <a class="btn btn-outline-secondary btn-sm" href="/Admin/FAQ/Edit/@f.Id">Edit</a>
-                    <a class="btn btn-outline-danger btn-sm" href="/Admin/FAQ/Delete/@f.Id">Delete</a>
+
+                    <a class="btn btn-outline-secondary btn-sm"
+                       href="@Url.Action("Edit", "FAQ", new { area = "Admin", id = faq.Id })">
+                        Edit
+                    </a>
+                    <form asp-area="Admin"
+                          asp-controller="FAQ"
+                          asp-action="Delete"
+                          method="post"
+                          class="d-inline">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" name="id" value="@faq.Id" />
+
+                        <button type="submit"
+                                class="btn btn-sm btn-outline-danger"
+                                onclick="return confirm('Delete this FAQ?')">
+                            Delete
+                        </button>
+                    </form>
                 </td>
             </tr>
         }

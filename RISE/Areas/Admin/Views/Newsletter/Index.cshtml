@@ -10,7 +10,7 @@
         {
             <tr>
                 <td>@s.Email</td>
-                <td>@s.SubscribedAt.ToString("g")</td>
+                <td>@s.SubscribedAt.ToLocalTime().ToString("g")</td>
             </tr>
         }
     </tbody>

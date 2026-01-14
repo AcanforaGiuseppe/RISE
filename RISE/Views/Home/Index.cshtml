@@ -7,15 +7,14 @@
 <!-- ================= SLIDER ================= -->
 @if(Model.SliderImages != null && Model.SliderImages.Any())
 {
-    <div id="homeSlider" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div id="homeSlider" class="carousel slide mb-5" data-bs-ride="carousel" data-bs-interval="10000">
         <div class="carousel-inner">
 
             @for(int i = 0; i < Model.SliderImages.Count; i++)
             {
                 <div class="carousel-item @(i == 0 ? "active" : "")">
                     <img src="@Model.SliderImages[i]"
-                         class="d-block w-100"
-                         style="max-height:500px; object-fit:cover;"
+                         class="d-block w-100 home-slider-img"
                          alt="RISE Calisthenics Slide @(i + 1)" />
                 </div>
             }
@@ -79,15 +78,3 @@ else
         }
     </div>
 }
-
-<!-- ================= CTA ================= -->
-<div class="text-center mt-5">
-    <a href="/Registration/Register" class="btn btn-primary btn-lg">
-        Register for Upcoming Competitions
-    </a>
-</div>
-
-
-<a href="/Home/Social/Index" class="btn btn-outline-secondary mt-4">
-    View Social Feed
-</a>

@@ -1,18 +1,40 @@
-﻿@{
+﻿@model RISE.Models.News
+
+@{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Edit News";
 }
-@model RISE.Models.News
+
 <h2>Edit News</h2>
-<form method="post">
+
+<form asp-area="Admin"
+      asp-controller="News"
+      asp-action="Edit"
+      method="post">
+
+    @Html.AntiForgeryToken()
     <input type="hidden" asp-for="Id" />
-    <div class="mb-2">
-        <label class="form-label">Title</label>
-        <input class="form-control" asp-for="Title" required />
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" required />
     </div>
-    <div class="mb-2">
-        <label class="form-label">Content</label>
-        <textarea class="form-control" asp-for="Content" rows="6"></textarea>
+
+    <div class="mb-3">
+        <label asp-for="Content" class="form-label"></label>
+        <textarea asp-for="Content"
+                  class="form-control"
+                  rows="6"></textarea>
     </div>
-    <button class="btn btn-primary">Save</button>
-    <a class="btn btn-secondary" href="/Admin/News">Cancel</a>
+
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+
+    <a class="btn btn-secondary"
+       asp-area="Admin"
+       asp-controller="News"
+       asp-action="Index">
+        Cancel
+    </a>
 </form>

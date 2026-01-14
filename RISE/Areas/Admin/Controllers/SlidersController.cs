@@ -2,6 +2,7 @@
 
 namespace RISE.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class SlidersController : BaseAdminController
     {
         private readonly IWebHostEnvironment _env;
@@ -11,61 +12,45 @@ namespace RISE.Areas.Admin.Controllers
             _env = env;
         }
 
-        // GET: /Admin/Slider
         public IActionResult Index()
         {
             var folder = Path.Combine(_env.WebRootPath, "images", "slider");
-            if(!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+
+            if(!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
 
             var files = Directory.GetFiles(folder)
-                .Select(f => "/images/slider/" + Path.GetFileName(f))
-                .OrderBy(x => x)
-                .ToList();
+                                 .Select(Path.GetFileName)
+                                 .ToList();
 
             return View(files);
         }
 
-        // POST: /Admin/Slider/Upload
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Upload(IFormFile file)
+        public IActionResult Upload(List<IFormFile> files)
         {
-            if(file == null || file.Length == 0)
-            {
-                TempData["Error"] = "Please select a file.";
+            if(files == null || files.Count == 0)
                 return RedirectToAction(nameof(Index));
-            }
-
-            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
-            var allowed = new HashSet<string> { ".jpg", ".jpeg", ".png", ".webp" };
-            if(!allowed.Contains(ext))
-            {
-                TempData["Error"] = "Only .jpg, .jpeg, .png, .webp are allowed.";
-                return RedirectToAction(nameof(Index));
-            }
-
-            // Optional: size limit (5 MB)
-            const long maxBytes = 5 * 1024 * 1024;
-            if(file.Length > maxBytes)
-            {
-                TempData["Error"] = "File too large. Max 5MB.";
-                return RedirectToAction(nameof(Index));
-            }
 
             var folder = Path.Combine(_env.WebRootPath, "images", "slider");
-            if(!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+            Directory.CreateDirectory(folder);
 
-            var safeName = $"{Guid.NewGuid():N}{ext}";
-            var fullPath = Path.Combine(folder, safeName);
+            foreach(var file in files)
+            {
+                if(file.Length == 0) continue;
 
-            await using var stream = new FileStream(fullPath, FileMode.Create);
-            await file.CopyToAsync(stream);
+                // 🔒 sicurezza base
+                var fileName = Path.GetFileName(file.FileName);
+                var filePath = Path.Combine(folder, fileName);
 
-            TempData["Success"] = "Image uploaded.";
+                using var stream = new FileStream(filePath, FileMode.Create);
+                file.CopyTo(stream);
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: /Admin/Slider/Delete
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(string fileName)
@@ -73,16 +58,11 @@ namespace RISE.Areas.Admin.Controllers
             if(string.IsNullOrWhiteSpace(fileName))
                 return RedirectToAction(nameof(Index));
 
-            // prevent path traversal
-            fileName = Path.GetFileName(fileName);
+            var path = Path.Combine(_env.WebRootPath, "images", "slider", fileName);
 
-            var folder = Path.Combine(_env.WebRootPath, "images", "slider");
-            var fullPath = Path.Combine(folder, fileName);
+            if(System.IO.File.Exists(path))
+                System.IO.File.Delete(path);
 
-            if(System.IO.File.Exists(fullPath))
-                System.IO.File.Delete(fullPath);
-
-            TempData["Success"] = "Image deleted.";
             return RedirectToAction(nameof(Index));
         }
     }

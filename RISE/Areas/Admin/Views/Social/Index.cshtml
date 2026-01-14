@@ -1,52 +1,54 @@
-﻿@model List<RISE.Models.News>
+﻿@model List<RISE.Models.SocialPost>
 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-    ViewData["Title"] = "News";
+    ViewData["Title"] = "Social Posts";
 }
 
-<h2>News</h2>
+<h2>Social Posts</h2>
 
 <a class="btn btn-primary btn-sm mb-3"
    asp-area="Admin"
-   asp-controller="News"
+   asp-controller="Social"
    asp-action="Create">
-    Create
+    Create Post
 </a>
 
 <table class="table table-sm align-middle">
     <thead>
         <tr>
-            <th>Title</th>
+            <th>Platform</th>
+            <th>Content</th>
             <th>Date</th>
             <th class="text-end">Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var n in Model)
+        @foreach(var post in Model)
         {
             <tr>
-                <td>@n.Title</td>
-                <td>@n.PostedAt.ToString("g")</td>
+                <td>@post.Platform</td>
+                <td>@post.Content</td>
+                <td>@post.PostedAt.ToString("g")</td>
                 <td class="text-end">
                     <a class="btn btn-outline-secondary btn-sm"
                        asp-area="Admin"
-                       asp-controller="News"
+                       asp-controller="Social"
                        asp-action="Edit"
-                       asp-route-id="@n.Id">
+                       asp-route-id="@post.Id">
                         Edit
                     </a>
 
                     <form asp-area="Admin"
-                          asp-controller="News"
+                          asp-controller="Social"
                           asp-action="Delete"
-                          asp-route-id="@n.Id"
+                          asp-route-id="@post.Id"
                           method="post"
                           class="d-inline">
                         @Html.AntiForgeryToken()
                         <button type="submit"
                                 class="btn btn-outline-danger btn-sm"
-                                onclick="return confirm('Delete this news?');">
+                                onclick="return confirm('Delete this post?');">
                             Delete
                         </button>
                     </form>

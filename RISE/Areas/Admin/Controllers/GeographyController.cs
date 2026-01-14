@@ -3,6 +3,7 @@ using RISE.Data;
 
 namespace RISE.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class GeographyController : BaseAdminController
     {
         private readonly ApplicationDbContext _context;
@@ -14,8 +15,9 @@ namespace RISE.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var data = _context.Registrations
-                .GroupBy(r => r.Country)
+            var data = _context.Users
+                .Where(u => !string.IsNullOrEmpty(u.Country))
+                .GroupBy(u => u.Country)
                 .Select(g => new
                 {
                     Country = g.Key,
@@ -26,5 +28,6 @@ namespace RISE.Areas.Admin.Controllers
 
             return View(data);
         }
+
     }
 }

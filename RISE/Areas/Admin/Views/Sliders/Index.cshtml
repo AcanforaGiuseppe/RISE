@@ -1,60 +1,68 @@
-﻿@{
+﻿@model List<string>
+@{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Slider Images";
 }
-@model List<string>
 
 <h2>Slider Images</h2>
 
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger">@TempData["Error"]</div>
-}
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">@TempData["Success"]</div>
-}
+<form asp-action="Upload"
+      method="post"
+      enctype="multipart/form-data"
+      class="mb-4">
 
-<div class="card mb-3">
-    <div class="card-body">
-        <form asp-action="Upload" method="post" enctype="multipart/form-data">
-            @Html.AntiForgeryToken()
-            <div class="d-flex gap-2 align-items-center">
-                <input type="file" name="file" class="form-control" accept=".jpg,.jpeg,.png,.webp" required />
-                <button class="btn btn-primary">Upload</button>
-            </div>
-            <small class="text-muted">Allowed: jpg, jpeg, png, webp. Max 5MB.</small>
-        </form>
+    @Html.AntiForgeryToken()
+
+    <div class="mb-2">
+        <input type="file"
+               name="files"
+               multiple
+               accept="image/*"
+               class="form-control" />
     </div>
-</div>
 
-@if (!Model.Any())
+    <button class="btn btn-primary btn-sm">
+        Upload Images
+    </button>
+</form>
+
+@if(!Model.Any())
 {
-    <p>No images uploaded yet.</p>
+    <p><em>No images uploaded yet.</em></p>
 }
 else
 {
-    <div class="row">
-        @foreach (var img in Model)
-        {
-            var fileName = System.IO.Path.GetFileName(img);
-
-            <div class="col-md-4 col-lg-3 mb-3">
-                <div class="card">
-                    <img src="@img" class="card-img-top" style="height:160px; object-fit:cover;" />
-                    <div class="card-body p-2 d-flex justify-content-between align-items-center">
-                        <small class="text-muted text-truncate" style="max-width:140px;">@fileName</small>
-                        <form asp-action="Delete" method="post" class="ms-2">
+    <table class="table table-sm align-middle">
+        <thead>
+            <tr>
+                <th>Preview</th>
+                <th>File name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var file in Model)
+            {
+                <tr>
+                    <td style="width:120px">
+                        <img src="~/images/slider/@file"
+                             style="max-height:60px"
+                             class="img-fluid rounded" />
+                    </td>
+                    <td>@file</td>
+                    <td class="text-end">
+                        <form asp-action="Delete"
+                              method="post"
+                              class="d-inline">
                             @Html.AntiForgeryToken()
-                            <input type="hidden" name="fileName" value="@fileName" />
-                            <button class="btn btn-sm btn-danger"
-                                    onclick="return confirm('Delete this image?');">
-                                <i class="fas fa-trash"></i>
+                            <input type="hidden" name="fileName" value="@file" />
+                            <button class="btn btn-sm btn-outline-danger">
+                                Delete
                             </button>
                         </form>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

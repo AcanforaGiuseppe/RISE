@@ -1,0 +1,39 @@
+﻿@model RISE.Models.SocialPost
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Create Social Post";
+}
+
+<h2>Create Social Post</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label asp-for="Platform" class="form-label"></label>
+        <select asp-for="Platform" class="form-select">
+            <option>Instagram</option>
+            <option>Facebook</option>
+            <option>TikTok</option>
+            <option>YouTube</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Content" class="form-label"></label>
+        <textarea asp-for="Content" class="form-control" rows="4"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ImageUrl" class="form-label"></label>
+        <input asp-for="ImageUrl" class="form-control" placeholder="https://..." />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ExternalUrl" class="form-label"></label>
+        <input asp-for="ExternalUrl" class="form-control" placeholder="https://instagram.com/..." />
+    </div>
+
+    <button class="btn btn-primary">Publish</button>
+    <a class="btn btn-secondary" href="@Url.Action("Index")">Cancel</a>
+</form>

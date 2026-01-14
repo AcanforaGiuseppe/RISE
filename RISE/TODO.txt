@@ -1,15 +1,6 @@
-Modulo iscrizione gare ? ? già creato modello Registration, controller, e viste admin. Manca solo un form pubblico collegato (per gli atleti).
-
-Sistema newsletter reale ? ?? al momento è solo simulato (salviamo nel DB), manca l’integrazione con un mail server (SMTP, SendGrid, ecc.).
-
-Sezione multilingua (IT/EN) ? ?? non ancora implementata, va attivato il sistema di localizzazione di ASP.NET Core e le risorse .resx.
-
-Documentazione e README ? ?? ancora da scrivere.
-
-?? In sintesi:
-
-Completati: iscrizioni (backend), admin panel base.
-
-Da fare: newsletter reale, multilingua, dark/light persistente, slider automatico, social feed, doc completa.
-
-Parziali: form pubblico iscrizione gare, gestione utenti admin.
+1]	Sistema newsletter reale - manca l’integrazione con un mail server (SMTP, SendGrid, ecc.).
+2]	Sezione multilingua (IT/EN) - non ancora implementata, va attivato il sistema di localizzazione di ASP.NET Core e le risorse .resx.
+3]	Documentazione e README ancora da scrivere.
+4]	Pannello admin fix:
+		Slider images -> scegli file e upload file sulla stessa riga; accettazione di eliminare il record come nelle altre parti del progetto.
+		Create User in admin -> users.

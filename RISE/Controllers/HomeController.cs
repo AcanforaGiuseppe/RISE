@@ -49,7 +49,8 @@ namespace RISE.Controllers
 
         public IActionResult Rules()
         {
-            return View();
+            var faqs = _context.FAQs.ToList();
+            return View(faqs);
         }
 
         public IActionResult Contact()

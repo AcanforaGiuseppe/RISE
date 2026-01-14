@@ -1,0 +1,45 @@
+﻿@model RISE.Models.SocialPost
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Edit Social Post";
+}
+
+<h2>Edit Social Post</h2>
+
+<form asp-area="Admin" asp-controller="Social" asp-action="Edit" method="post">
+
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Platform" class="form-label"></label>
+        <input asp-for="Platform" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Content" class="form-label"></label>
+        <textarea asp-for="Content" class="form-control" rows="4"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ImageUrl" class="form-label">Banner Url</label>
+        <input asp-for="ImageUrl" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ExternalUrl" class="form-label">Link Url</label>
+        <input asp-for="ExternalUrl" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+
+    <a class="btn btn-secondary"
+       asp-area="Admin"
+       asp-controller="Social"
+       asp-action="Index">
+        Cancel
+    </a>
+</form>

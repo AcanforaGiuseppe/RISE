@@ -1,38 +1,92 @@
-﻿@{
+﻿@model RISE.Models.Admin.UserDashboardViewModel
+@{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Users";
 }
-@model List<RISE.Models.User>
 
-<h2>Users</h2>
+<h2 class="mb-4">User Dashboard</h2>
 
-<a class="btn btn-primary btn-sm mb-3" href="@Url.Action("Create", "Users", new { area = "Admin" })">Create</a>
+<div class="row g-3 mb-5">
+    <div class="col-md-3">
+        <div class="card p-4 text-center shadow-sm">
+            <strong>Total Users</strong>
+            <div class="fs-2">@Model.TotalUsers</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-4 text-center shadow-sm">
+            <strong>New (30 days)</strong>
+            <div class="fs-2">@Model.NewUsersLast30Days</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-4 text-center shadow-sm">
+            <strong>Returning</strong>
+            <div class="fs-2">@Model.ReturningUsers</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-4 text-center shadow-sm">
+            <strong>Retention</strong>
+            <div class="fs-2">@Model.RetentionRate.ToString("0.0")%</div>
+        </div>
+    </div>
+</div>
 
 @if(TempData["Error"] != null)
 {
-    <div class="alert alert-warning">@TempData["Error"]</div>
+    <div class="alert alert-danger">@TempData["Error"]</div>
 }
 
-<table class="table table-sm">
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">Users</h4>
+    <a class="btn btn-primary btn-sm" asp-area="Admin" asp-controller="Users" asp-action="Create">Create User</a>
+</div>
+
+<table class="table table-striped align-middle">
     <thead>
         <tr>
             <th>Username</th>
-            <th>Role</th>
-            <th class="text-end"></th>
+            <th style="width:120px;">Role</th>
+            <th style="width:180px;">Created</th>
+            <th class="text-end" style="width:260px;">Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var u in Model)
+        @foreach(var u in Model.Users)
         {
             <tr>
                 <td>@u.Username</td>
                 <td>@u.Role</td>
+                <td>@u.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
                 <td class="text-end">
-                    <a class="btn btn-outline-secondary btn-sm"
-                       href="@Url.Action("Edit", "Users", new { area = "Admin", id = u.Id })">Edit</a>
+                    <a class="btn btn-outline-info btn-sm"
+                       asp-area="Admin"
+                       asp-controller="Users"
+                       asp-action="Details"
+                       asp-route-id="@u.Id">
+                        Details
+                    </a>
 
-                    <form method="post" asp-action="Delete" asp-route-id="@u.Id" class="d-inline">
+                    <a class="btn btn-outline-secondary btn-sm"
+                       asp-area="Admin"
+                       asp-controller="Users"
+                       asp-action="Edit"
+                       asp-route-id="@u.Id">
+                        Edit
+                    </a>
+
+                    <form class="d-inline"
+                          asp-area="Admin"
+                          asp-controller="Users"
+                          asp-action="Delete"
+                          asp-route-id="@u.Id"
+                          method="post">
                         @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                        <button type="submit" class="btn btn-outline-danger btn-sm"
+                                onclick="return confirm('Delete this user?');">
+                            Delete
+                        </button>
                     </form>
                 </td>
             </tr>

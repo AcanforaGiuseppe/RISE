@@ -1,16 +1,56 @@
-﻿@{
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-}
-
+﻿@model RISE.Models.Admin.AdminDashboardViewModel
 @{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Dashboard";
 }
-<h2>Dashboard</h2>
-<div class="row g-3">
-    <div class="col-md-4"><div class="card p-3"><b>News</b><div>@ViewBag.NewsCount</div></div></div>
-    <div class="col-md-4"><div class="card p-3"><b>FAQ</b><div>@ViewBag.FAQCount</div></div></div>
-    <div class="col-md-4"><div class="card p-3"><b>Registrations</b><div>@ViewBag.RegistrationsCount</div></div></div>
-    <div class="col-md-4"><div class="card p-3"><b>Users</b><div>@ViewBag.UsersCount</div></div></div>
-    <div class="col-md-4"><div class="card p-3"><b>Subscribers</b><div>@ViewBag.SubscribersCount</div></div></div>
-    <div class="col-md-4"><div class="card p-3"><b>Content Blocks</b><div>@ViewBag.BlocksCount</div></div></div>
+
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="row g-4">
+
+    <div class="col-xl-4 col-md-6">
+        <div class="card dashboard-card bg-primary text-white h-100">
+            <div class="card-body text-center">
+                <h5 class="card-title">News</h5>
+                <div class="dashboard-number">@Model.NewsCount</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4 col-md-6">
+        <div class="card dashboard-card bg-success text-white h-100">
+            <div class="card-body text-center">
+                <h5 class="card-title">FAQ</h5>
+                <div class="dashboard-number">@Model.FAQCount</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4 col-md-6">
+        <div class="card dashboard-card bg-warning text-dark h-100">
+            <div class="card-body text-center">
+                <h5 class="card-title">Subscribers</h5>
+                <div class="dashboard-number">@Model.SubscribersCount</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6">
+        <div class="card dashboard-card bg-info text-dark h-100">
+            <div class="card-body text-center">
+                <h5 class="card-title">Competitions</h5>
+                <div class="dashboard-number">@Model.CompetitionsCount</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-md-6">
+        <div class="card dashboard-card bg-danger text-white h-100">
+            <div class="card-body text-center">
+                <h5 class="card-title">Pending Registrations</h5>
+                <div class="dashboard-number">@Model.RegistrationsCount</div>
+            </div>
+        </div>
+    </div>
+
 </div>

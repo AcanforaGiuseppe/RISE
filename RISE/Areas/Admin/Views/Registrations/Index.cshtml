@@ -1,22 +1,61 @@
-﻿@{
+﻿@model List<RISE.Models.Registration>
+@{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-@model List<RISE.Models.Registration>
-<h2>Registrations</h2>
-<table class="table table-sm">
-    <thead><tr><th>Name</th><th>Email</th><th>Category</th><th>Date</th><th></th></tr></thead>
-    <tbody>
-        @foreach(var r in Model)
-        {
+
+<h2>Pending Registrations</h2>
+
+@if(!Model.Any())
+{
+    <p class="text-muted">No pending registrations.</p>
+}
+else
+{
+    <table class="table table-sm align-middle">
+        <thead>
             <tr>
-                <td>@r.ParticipantName</td>
-                <td>@r.Email</td>
-                <td>@r.Category</td>
-                <td>@r.RegisteredAt.ToString("g")</td>
-                <td class="text-end">
-                    <a class="btn btn-outline-danger btn-sm" href="/Admin/Registrations/Delete/@r.Id">Delete</a>
-                </td>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th class="text-end"></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach(var r in Model)
+            {
+                <tr>
+                    <td>@r.ParticipantName</td>
+                    <td>@r.Email</td>
+                    <td>@r.Category</td>
+                    <td>@r.RegisteredAt.ToLocalTime().ToString("g")</td>
+                    <td class="text-end">
+
+                        <!-- APPROVE -->
+                        <form asp-action="Approve"
+                              method="post"
+                              class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@r.Id" />
+                            <button class="btn btn-success btn-sm">
+                                Approve
+                            </button>
+                        </form>
+
+                        <!-- REJECT -->
+                        <form asp-action="Reject"
+                              method="post"
+                              class="d-inline ms-1">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@r.Id" />
+                            <button class="btn btn-danger btn-sm">
+                                Reject
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

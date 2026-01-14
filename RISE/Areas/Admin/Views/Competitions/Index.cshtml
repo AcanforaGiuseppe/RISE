@@ -46,13 +46,6 @@
                            href="@Url.Action("Edit", "Competitions", new { id = comp.Id, area = "Admin" })">
                             Edit
                         </a>
-
-                        <!-- STATISTICS -->
-                        <a class="btn btn-sm btn-info"
-                           href="@Url.Action("Details", "CompetitionStatistics", new { id = comp.Id, area = "Admin" })">
-                            Statistics
-                        </a>
-
                         <!-- DELETE -->
                         <form asp-action="Delete"
                               asp-controller="Competitions"

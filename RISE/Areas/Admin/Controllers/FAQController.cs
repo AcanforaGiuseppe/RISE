@@ -4,47 +4,64 @@ using RISE.Models;
 
 namespace RISE.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class FAQController : BaseAdminController
     {
-        private readonly ApplicationDbContext _db;
-        public FAQController(ApplicationDbContext db) { _db = db; }
+        private readonly ApplicationDbContext _context;
 
-        public IActionResult Index() => View(_db.FAQs.OrderBy(f => f.Id).ToList());
+        public FAQController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-        public IActionResult Create() => View(new FAQ());
+        public IActionResult Index()
+            => View(_context.FAQs.ToList());
+
+        public IActionResult Create()
+            => View(new FAQ());
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(FAQ model)
         {
-            if(!ModelState.IsValid) return View(model);
-            _db.FAQs.Add(model);
-            _db.SaveChanges();
+            if(!ModelState.IsValid)
+                return View(model);
+
+            _context.FAQs.Add(model);
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(int id)
         {
-            var item = _db.FAQs.Find(id);
-            if(item == null) return NotFound();
-            return View(item);
+            var faq = _context.FAQs.Find(id);
+            if(faq == null) return NotFound();
+            return View(faq);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(FAQ model)
         {
-            if(!ModelState.IsValid) return View(model);
-            _db.FAQs.Update(model);
-            _db.SaveChanges();
+            if(!ModelState.IsValid)
+                return View(model);
+
+            _context.FAQs.Update(model);
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            var item = _db.FAQs.Find(id);
-            if(item == null) return NotFound();
-            _db.FAQs.Remove(item);
-            _db.SaveChanges();
+            var faq = _context.FAQs.Find(id);
+            if(faq == null) return NotFound();
+
+            _context.FAQs.Remove(faq);
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

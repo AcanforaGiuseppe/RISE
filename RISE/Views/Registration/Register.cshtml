@@ -1,24 +1,92 @@
 ﻿@model RISE.Models.Registration
 
+@{
+    ViewData["Title"] = "Competition Registration";
+}
+
 <h2>Competition Registration</h2>
 
-<form asp-action="Register" method="post" class="mt-3">
+<form asp-action="Register"
+      asp-controller="Registration"
+      method="post"
+      class="mt-3">
+
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
     <div class="mb-3">
-        <label asp-for="ParticipantName" class="form-label"></label>
-        <input asp-for="ParticipantName" class="form-control" required />
+        <label asp-for="ParticipantName" class="form-label">Name & Surname</label>
+        <input asp-for="ParticipantName" class="form-control" />
     </div>
+
     <div class="mb-3">
         <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" type="email" class="form-control" required />
+        <input asp-for="Email" type="email" class="form-control" />
     </div>
+
+    <div class="mb-3">
+        <label asp-for="Country" class="form-label"></label>
+        <input asp-for="Country" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="City" class="form-label"></label>
+        <input asp-for="City" class="form-control" />
+    </div>
+
     <div class="mb-3">
         <label asp-for="Category" class="form-label"></label>
         <select asp-for="Category" class="form-select">
+            <option value="">-- Select category --</option>
             <option value="Under 70kg">Under 70kg</option>
             <option value="70-85kg">70-85kg</option>
             <option value="Over 85kg">Over 85kg</option>
             <option value="Open">Open</option>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">Register</button>
+
+    <!-- competizione temporanea -->
+    <input type="hidden" name="CompetitionId" value="1" />
+
+    <button type="submit" class="btn btn-primary">
+        Register
+    </button>
 </form>
+
+@if(TempData["RegistrationSuccess"] != null)
+{
+    <div class="modal fade show"
+         id="successModal"
+         tabindex="-1"
+         style="display:block; background:rgba(0,0,0,.6)">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Registration Successful</h5>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        Thank you for registering!<br />
+                        We’ll contact you soon with more details.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-primary"
+                            onclick="location.href='@Url.Action("Register", "Registration")'">
+                        Close
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

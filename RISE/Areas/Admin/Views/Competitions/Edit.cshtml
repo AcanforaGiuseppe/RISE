@@ -1,33 +1,80 @@
 ﻿@model RISE.Models.Competition
 
 @{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Edit Competition";
 }
 
 <h2>Edit Competition</h2>
 
 <form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+
     <input type="hidden" asp-for="Id" />
+
     <div class="mb-3">
-        <label class="form-label">Title</label>
+        <label asp-for="Title" class="form-label"></label>
         <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
+
     <div class="mb-3">
-        <label class="form-label">Location</label>
+        <label asp-for="Location" class="form-label"></label>
         <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
     </div>
+
     <div class="mb-3">
-        <label class="form-label">Date</label>
+        <label asp-for="Date" class="form-label"></label>
         <input asp-for="Date" type="date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
     </div>
+
     <div class="mb-3">
-        <label class="form-label">Description</label>
-        <textarea asp-for="Description" class="form-control"></textarea>
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description"
+                  class="form-control"
+                  rows="4"
+                  placeholder="Short description of the competition"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
     </div>
+
+    <!-- ✅ FIX CRITICO: Results come TESTO REALE -->
     <div class="mb-3">
-        <label class="form-label">Results</label>
-        <textarea asp-for="Results" class="form-control"></textarea>
+        <label asp-for="Results" class="form-label"></label>
+
+        <textarea asp-for="Results"
+                  class="form-control"
+                  rows="8"
+                  placeholder="Insert competition results.
+Example:
+MEN OPEN
+1) Mario Rossi
+2) Luca Bianchi
+3) Paolo Verdi
+
+You can also use basic HTML (br, b, ul, li)">
+        </textarea>
+
+        <span asp-validation-for="Results" class="text-danger"></span>
+
+        <small class="text-muted">
+            This content will be shown in a popup on the public Competitions page.
+        </small>
     </div>
-    <button type="submit" class="btn btn-success">Save</button>
-    <a class="btn btn-secondary" href="@Url.Action("Index")">Cancel</a>
+
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success">
+            Save
+        </button>
+
+        <a class="btn btn-secondary ms-2"
+           href="@Url.Action("Index")">
+            Cancel
+        </a>
+    </div>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

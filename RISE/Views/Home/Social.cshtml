@@ -1,20 +1,55 @@
 ﻿@model List<RISE.Models.SocialPost>
 
-<h2 class="mb-4">Social Feed</h2>
+@{
+    ViewData["Title"] = "Social Feed";
+}
 
-@foreach(var post in Model)
+<h2 class="mb-4 text-center">Social Feed</h2>
+
+@if(!Model.Any())
 {
-    <div class="card mb-3">
-        <div class="card-body">
-            <strong>@post.Platform</strong>
-            <p>@post.Content</p>
+    <p class="text-center">No social posts available yet.</p>
+}
+else
+{
+    <div class="row g-4">
+        @foreach(var post in Model)
+        {
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
 
-            @if(!string.IsNullOrEmpty(post.ImageUrl))
-            {
-                <img src="@post.ImageUrl" class="img-fluid rounded mb-2" />
-            }
+                    @if(!string.IsNullOrEmpty(post.ImageUrl))
+                    {
+                        <img src="@post.ImageUrl"
+                             class="card-img-top"
+                             style="object-fit:cover; max-height:240px;"
+                             alt="@post.Platform post" />
+                    }
 
-            <small class="text-muted">@post.PostedAt.ToString("dd MMM yyyy")</small>
-        </div>
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge bg-secondary mb-2">
+                            @post.Platform
+                        </span>
+
+                        <p class="card-text flex-grow-1">
+                            @post.Content
+                        </p>
+
+                        <small class="text-muted">
+                            @post.PostedAt.ToString("dd MMM yyyy")
+                        </small>
+
+                        @if(!string.IsNullOrEmpty(post.ExternalUrl))
+                        {
+                            <a href="@post.ExternalUrl"
+                               target="_blank"
+                               class="btn btn-outline-primary btn-sm mt-2">
+                                View on @post.Platform
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 }

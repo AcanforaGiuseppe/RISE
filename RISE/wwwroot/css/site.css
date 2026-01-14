@@ -1,6 +1,10 @@
+/* =========================
+   BASE (LIGHT THEME DEFAULT)
+   ========================= */
+
 body {
-    background-color: #121212;
-    color: #f5f5f5;
+    background-color: #ffffff;
+    color: #212529;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -14,6 +18,14 @@ a {
         text-decoration: underline;
     }
 
+.container {
+    max-width: 960px;
+}
+
+/* =========================
+   NAVBAR
+   ========================= */
+
 .navbar-dark .navbar-nav .nav-link {
     color: #ffa040;
 }
@@ -22,21 +34,45 @@ a {
         color: #ff6f00;
     }
 
-.container {
-    max-width: 960px;
+/* =========================
+   CARDS / TABLES (LIGHT)
+   ========================= */
+
+.card {
+    background-color: #ffffff;
+    color: #212529;
 }
+
+    .card .text-muted {
+        color: #6c757d !important;
+    }
+
+.table {
+    background-color: #ffffff;
+    color: #212529;
+}
+
+/* =========================
+   SLIDER / HOME
+   ========================= */
 
 .carousel-item .card {
-    background-color: #222;
     border-radius: 8px;
-    color: #fff;
-    box-shadow: 0 2px 6px rgba(255, 111, 0, 0.6);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
+/* =========================
+   FOOTER
+   ========================= */
+
 footer {
-    background-color: #1a1a1a;
+    background-color: #f8f9fa;
     font-size: 0.9rem;
 }
+
+/* =========================
+   NEWSLETTER
+   ========================= */
 
 .newsletter-box {
     display: flex;
@@ -50,58 +86,32 @@ footer {
         flex: 1;
         padding: 6px 12px;
         border-radius: 4px;
-        border: none;
+        border: 1px solid #ced4da;
     }
 
     .newsletter-box button {
         padding: 6px 16px;
-        border: none;
     }
 
-/* Admin buttons */
-.btn-primary, .btn-success {
+/* =========================
+   BUTTONS
+   ========================= */
+
+.btn-primary,
+.btn-success {
     background-color: #ff6f00;
     border-color: #ff6f00;
 }
 
-    .btn-primary:hover, .btn-success:hover {
+    .btn-primary:hover,
+    .btn-success:hover {
         background-color: #ffa040;
         border-color: #ffa040;
     }
 
-/* THEME */
-body.dark-theme {
-    background-color: #121212;
-    color: #e0e0e0;
-}
-
-    body.dark-theme .navbar,
-    body.dark-theme footer {
-        background-color: #1f1f1f !important;
-    }
-
-    body.dark-theme a,
-    body.dark-theme a.nav-link {
-        color: #bbb !important;
-    }
-
-    body.dark-theme .btn-primary {
-        background-color: #bb86fc;
-        border-color: #bb86fc;
-        color: #121212;
-    }
-
-    body.dark-theme .accordion-button {
-        background-color: #1f1f1f;
-        color: #e0e0e0;
-    }
-
-        body.dark-theme .accordion-button:not(.collapsed) {
-            background-color: #333;
-            color: #fff;
-        }
-
-/* FAQ */
+/* =========================
+   FAQ (LIGHT)
+   ========================= */
 
 .faq-list {
     max-width: 800px;
@@ -123,7 +133,7 @@ body.dark-theme {
     }
 
 .faq-answer {
-    background-color: white;
+    background-color: #ffffff;
     border-top: 1px solid #dee2e6;
     font-size: 1rem;
     color: #333;
@@ -133,7 +143,161 @@ body.dark-theme {
     transition: transform 0.3s ease;
 }
 
-/* Optional: rotate icon when open */
-.faq-answer[style*="display: block"] + .faq-question i {
-    transform: rotate(180deg);
+/* =========================
+   DARK THEME (ONLY WHEN ACTIVE)
+   ========================= */
+
+body.dark-theme {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+    /* Containers */
+    body.dark-theme .navbar,
+    body.dark-theme footer {
+        background-color: #1f1f1f !important;
+    }
+
+    /* Links */
+    body.dark-theme a,
+    body.dark-theme .nav-link {
+        color: #bbbbbb !important;
+    }
+
+    /* Cards / Tables / Forms */
+    body.dark-theme .card,
+    body.dark-theme .table,
+    body.dark-theme .list-group-item,
+    body.dark-theme .form-control,
+    body.dark-theme .form-select {
+        background-color: #1f1f1f;
+        color: #e0e0e0;
+    }
+
+    /* Muted text */
+    body.dark-theme .text-muted {
+        color: #aaaaaa !important;
+    }
+
+    /* Buttons */
+    body.dark-theme .btn-primary {
+        background-color: #bb86fc;
+        border-color: #bb86fc;
+        color: #121212;
+    }
+
+    /* Accordion */
+    body.dark-theme .accordion-button {
+        background-color: #1f1f1f;
+        color: #e0e0e0;
+    }
+
+        body.dark-theme .accordion-button:not(.collapsed) {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+
+    /* ===============================
+   FAQ + RULES – DARK MODE FIX
+   =============================== */
+
+    body.dark-theme .faq-item {
+        background-color: #1f1f1f;
+        border-color: #333;
+    }
+
+    body.dark-theme .faq-question {
+        color: #f5f5f5;
+    }
+
+    body.dark-theme .faq-answer {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+        border-top: 1px solid #333;
+    }
+
+    body.dark-theme .faq-question:hover {
+        background-color: #2a2a2a;
+    }
+
+/* Home slider image sizing */
+.home-slider-img {
+    max-height: 250px;
+    object-fit: cover;
+}
+
+/* ============================
+   ADMIN DASHBOARD CARDS
+   ============================ */
+
+.dashboard-card {
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+    .dashboard-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+.dashboard-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+body.dark-theme table {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+}
+
+    body.dark-theme table thead {
+        background-color: #2a2a2a;
+    }
+
+    body.dark-theme table th,
+    body.dark-theme table td {
+        background-color: transparent !important;
+        color: #e0e0e0;
+        border-color: #333;
+    }
+
+    body.dark-theme table.table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: #242424;
+    }
+
+    body.dark-theme table.table-striped > tbody > tr:nth-of-type(even) {
+        background-color: #1f1f1f;
+    }
+
+    body.dark-theme table.table-hover > tbody > tr:hover {
+        background-color: #333;
+    }
+
+body.dark-theme .table {
+    --bs-table-bg: transparent;
+    --bs-table-striped-bg: #242424;
+    --bs-table-striped-color: #e0e0e0;
+    --bs-table-hover-bg: #333;
+    --bs-table-hover-color: #fff;
+}
+
+/* DARK MODE - BOOTSTRAP MODAL FIX */
+body.dark-theme .modal-content {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+}
+
+body.dark-theme .modal-header,
+body.dark-theme .modal-footer {
+    border-color: #333;
+}
+
+body.dark-theme .modal-title,
+body.dark-theme .modal-body,
+body.dark-theme .modal-content p,
+body.dark-theme .modal-content label {
+    color: #e0e0e0 !important;
 }
