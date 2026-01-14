@@ -1770,23 +1770,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Crionet\\.nuget\\packages\\": {},
+    "C:\\Users\\acanf\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Crionet\\Desktop\\RISE\\RISE\\RISE.csproj",
+      "projectUniqueName": "C:\\Users\\acanf\\Desktop\\RISE\\RISE\\RISE.csproj",
       "projectName": "RISE",
-      "projectPath": "C:\\Users\\Crionet\\Desktop\\RISE\\RISE\\RISE.csproj",
-      "packagesPath": "C:\\Users\\Crionet\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Crionet\\Desktop\\RISE\\RISE\\obj\\",
+      "projectPath": "C:\\Users\\acanf\\Desktop\\RISE\\RISE\\RISE.csproj",
+      "packagesPath": "C:\\Users\\acanf\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\acanf\\Desktop\\RISE\\RISE\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Crionet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\acanf\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
