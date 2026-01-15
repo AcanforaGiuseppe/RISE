@@ -35,7 +35,7 @@ namespace RISE.Controllers
 
             // 1) Già approvato (presente come User)
             var alreadyApproved = _context.Users.Any(u =>
-                (u.Username ?? "").Trim().ToLower() == email);
+                (u.Email ?? "").Trim().ToLower() == email);
 
             // 2) Già in pending (registrazione già presente per la stessa competizione)
             var alreadyPending = _context.Registrations.Any(r =>

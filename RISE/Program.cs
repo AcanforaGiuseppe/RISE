@@ -38,7 +38,7 @@ using(var scope = app.Services.CreateScope())
     {
         db.Users.Add(new User
         {
-            Username = "admin",
+            Email = "admin",
             PasswordHash = PasswordHasher.Hash("password"),
             Role = "Admin"
         });

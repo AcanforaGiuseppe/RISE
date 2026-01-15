@@ -36,14 +36,14 @@ namespace RISE.Areas.Admin.Controllers
             var email = reg.Email.Trim().ToLowerInvariant();
 
             // 1) controllo se l'utente esiste già
-            var user = _context.Users.FirstOrDefault(u => u.Username == email);
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
 
             if(user == null)
             {
                 // 2) creazione nuovo user
                 user = new Models.User
                 {
-                    Username = reg.Email,
+                    Email = reg.Email,
                     FullName = reg.ParticipantName,
                     Country = reg.Country,
                     City = reg.City,
@@ -51,14 +51,14 @@ namespace RISE.Areas.Admin.Controllers
 
                     PasswordHash = PasswordHasher.Hash("changeme"),
                     Role = "User",
-                    CreatedAt = DateTime.UtcNow
+                    CreatedAt = DateTime.Now
                 };
 
                 _context.Users.Add(user);
-                _context.SaveChanges(); // per ottenere user.Id
+                _context.SaveChanges();
             }
 
-            // 3) collegamento registration → user
+            // 3) collegamento registration -> user
             reg.UserId = user.Id;
             reg.Approved = true;
 
@@ -80,5 +80,6 @@ namespace RISE.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

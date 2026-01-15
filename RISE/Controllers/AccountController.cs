@@ -21,7 +21,7 @@ namespace RISE.Controllers
         [HttpPost]
         public async Task<IActionResult> AdminLogin(string username, string password)
         {
-            var user = _db.Users.FirstOrDefault(u => u.Username == username && u.Role == "Admin");
+            var user = _db.Users.FirstOrDefault(u => u.Email == username && u.Role == "Admin");
 
             if(user == null || !PasswordHasher.Verify(password, user.PasswordHash))
             {
@@ -31,7 +31,7 @@ namespace RISE.Controllers
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Name, user.Email),
                 new Claim(ClaimTypes.Role, "Admin")
             };
 
@@ -48,7 +48,7 @@ namespace RISE.Controllers
         [HttpPost]
         public async Task<IActionResult> UserLogin(string username, string password)
         {
-            var user = _db.Users.FirstOrDefault(u => u.Username == username && u.Role == "User");
+            var user = _db.Users.FirstOrDefault(u => u.Email == username && u.Role == "User");
 
             if(user == null || !PasswordHasher.Verify(password, user.PasswordHash))
             {
@@ -58,7 +58,7 @@ namespace RISE.Controllers
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Name, user.Email),
                 new Claim(ClaimTypes.Role, "User")
             };
 

@@ -1,5 +1,4 @@
 ﻿@model RISE.Models.User
-
 @{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "Edit User";
@@ -7,48 +6,50 @@
 
 <h2>Edit User</h2>
 
-<form asp-area="Admin"
-      asp-controller="Users"
-      asp-action="Edit"
-      method="post">
+<form method="post" asp-action="Edit">
 
     @Html.AntiForgeryToken()
-
     <input type="hidden" asp-for="Id" />
 
     <div class="mb-3">
-        <label asp-for="Username" class="form-label"></label>
-        <input asp-for="Username"
-               class="form-control"
-               readonly />
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
     </div>
 
     <div class="mb-3">
-        <label class="form-label">New Password (optional)</label>
-        <input name="NewPassword"
-               type="password"
-               class="form-control"
-               placeholder="Leave empty to keep current password" />
+        <label>Full Name</label>
+        <input asp-for="FullName" class="form-control" />
     </div>
 
     <div class="mb-3">
-        <label asp-for="Role" class="form-label"></label>
+        <label>Country</label>
+        <input asp-for="Country" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>City</label>
+        <input asp-for="City" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Category</label>
+        <input asp-for="Category" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Role</label>
         <select asp-for="Role" class="form-select">
-            <option value="Admin">Admin</option>
-            <option value="User">User</option>
+            <option>User</option>
+            <option>Admin</option>
         </select>
     </div>
 
-    <div class="mt-3">
-        <button type="submit" class="btn btn-primary">
-            Save
-        </button>
-
-        <a class="btn btn-secondary"
-           asp-area="Admin"
-           asp-controller="Users"
-           asp-action="Index">
-            Cancel
-        </a>
+    <div class="mb-3">
+        <label>New Password (optional)</label>
+        <input asp-for="PasswordHash" type="password" class="form-control" />
+        <small class="text-muted">Leave empty to keep current password</small>
     </div>
+
+    <button class="btn btn-primary">Save</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
 </form>

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
+using RISE.Models;
 using RISE.Models.Admin;
+using RISE.Security;
 
 namespace RISE.Areas.Admin.Controllers
 {
@@ -54,26 +56,39 @@ namespace RISE.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View(new Models.User());
+            return View(new User());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Models.User model)
+        public IActionResult Create(User model)
         {
-            // normalizzazione username/email
-            model.Username = (model.Username ?? string.Empty).Trim().ToLowerInvariant();
+            // Normalizzazione
+            model.Email = (model.Email ?? "").Trim().ToLowerInvariant();
+            model.FullName = model.FullName?.Trim();
+            model.Country = model.Country?.Trim().ToLowerInvariant();
+            model.City = model.City?.Trim();
+            model.Category = model.Category?.Trim();
 
-            // blocco duplicati: 1 email = 1 user
-            var exists = _db.Users.Any(u => (u.Username ?? "").Trim().ToLower() == model.Username);
-            if(exists)
-                ModelState.AddModelError(nameof(model.Username), "This email/username already exists.");
+            // Blocco email duplicate
+            if(_db.Users.Any(u => u.Email == model.Email))
+                ModelState.AddModelError(nameof(model.Email), "This email already exists.");
+
+            // Password obbligatoria SOLO per Admin
+            if(model.Role == "Admin" && string.IsNullOrWhiteSpace(model.PasswordHash))
+                ModelState.AddModelError(nameof(model.PasswordHash), "Password is required for Admin users.");
 
             if(!ModelState.IsValid)
                 return View(model);
 
-            model.PasswordHash = Security.PasswordHasher.Hash(model.PasswordHash);
-            model.Role = string.IsNullOrWhiteSpace(model.Role) ? "User" : model.Role;
+            // Hash password solo se presente
+            if(!string.IsNullOrWhiteSpace(model.PasswordHash))
+                model.PasswordHash = PasswordHasher.Hash(model.PasswordHash);
+            else
+                model.PasswordHash = string.Empty;
+
+            // Orario locale corretto
+            model.CreatedAt = DateTime.Now;
 
             _db.Users.Add(model);
             _db.SaveChanges();
@@ -85,21 +100,29 @@ namespace RISE.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var u = _db.Users.Find(id);
-            if(u == null) return NotFound();
-            return View(u);
+            var user = _db.Users.Find(id);
+            if(user == null) return NotFound();
+            return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Models.User model)
+        public IActionResult Edit(User model)
         {
-            model.Username = (model.Username ?? string.Empty).Trim().ToLowerInvariant();
+            // Normalizzazione
+            model.Email = (model.Email ?? "").Trim().ToLowerInvariant();
+            model.FullName = model.FullName?.Trim();
+            model.Country = model.Country?.Trim().ToLowerInvariant();
+            model.City = model.City?.Trim();
+            model.Category = model.Category?.Trim();
 
-            // blocco duplicati su edit (escludendo se stesso)
-            var exists = _db.Users.Any(u => u.Id != model.Id && (u.Username ?? "").Trim().ToLower() == model.Username);
-            if(exists)
-                ModelState.AddModelError(nameof(model.Username), "This email/username already exists.");
+            // Blocco email duplicate (escludendo se stesso)
+            if(_db.Users.Any(u => u.Id != model.Id && u.Email == model.Email))
+                ModelState.AddModelError(nameof(model.Email), "This email already exists.");
+
+            // Password obbligatoria se ruolo Admin
+            if(model.Role == "Admin" && string.IsNullOrWhiteSpace(model.PasswordHash))
+                ModelState.AddModelError(nameof(model.PasswordHash), "Password is required for Admin users.");
 
             if(!ModelState.IsValid)
                 return View(model);
@@ -107,14 +130,19 @@ namespace RISE.Areas.Admin.Controllers
             var user = _db.Users.Find(model.Id);
             if(user == null) return NotFound();
 
-            user.Username = model.Username;
+            user.Email = model.Email;
+            user.FullName = model.FullName;
+            user.Country = model.Country;
+            user.City = model.City;
+            user.Category = model.Category;
             user.Role = model.Role;
 
-            // aggiorna password SOLO se inserita
+            // Aggiorna password solo se inserita
             if(!string.IsNullOrWhiteSpace(model.PasswordHash))
-                user.PasswordHash = Security.PasswordHasher.Hash(model.PasswordHash);
+                user.PasswordHash = PasswordHasher.Hash(model.PasswordHash);
 
             _db.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
 
