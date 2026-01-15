@@ -15,9 +15,7 @@ namespace RISE.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var folder = Path.Combine(_env.WebRootPath, "images", "slider");
-
-            if(!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
+            Directory.CreateDirectory(folder);
 
             var files = Directory.GetFiles(folder)
                                  .Select(Path.GetFileName)
@@ -40,7 +38,6 @@ namespace RISE.Areas.Admin.Controllers
             {
                 if(file.Length == 0) continue;
 
-                // 🔒 sicurezza base
                 var fileName = Path.GetFileName(file.FileName);
                 var filePath = Path.Combine(folder, fileName);
 

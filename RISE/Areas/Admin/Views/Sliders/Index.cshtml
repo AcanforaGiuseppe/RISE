@@ -13,17 +13,21 @@
 
     @Html.AntiForgeryToken()
 
-    <div class="mb-2">
-        <input type="file"
-               name="files"
-               multiple
-               accept="image/*"
-               class="form-control" />
-    </div>
+    <div class="row g-2 align-items-end">
+        <div class="col-md-9">
+            <input type="file"
+                   name="files"
+                   multiple
+                   accept="image/*"
+                   class="form-control" />
+        </div>
 
-    <button class="btn btn-primary btn-sm">
-        Upload Images
-    </button>
+        <div class="col-md-3 d-grid">
+            <button class="btn btn-primary">
+                Upload Images
+            </button>
+        </div>
+    </div>
 </form>
 
 @if(!Model.Any())
@@ -37,7 +41,7 @@ else
             <tr>
                 <th>Preview</th>
                 <th>File name</th>
-                <th></th>
+                <th class="text-end">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -51,15 +55,20 @@ else
                     </td>
                     <td>@file</td>
                     <td class="text-end">
+
                         <form asp-action="Delete"
                               method="post"
-                              class="d-inline">
+                              class="d-inline"
+                              onsubmit="return confirm('Delete this image from the slider?');">
+
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="fileName" value="@file" />
-                            <button class="btn btn-sm btn-outline-danger">
+
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
                                 Delete
                             </button>
                         </form>
+
                     </td>
                 </tr>
             }
