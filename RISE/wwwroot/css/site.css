@@ -1,7 +1,4 @@
-/* =========================
-   BASE (LIGHT THEME DEFAULT)
-   ========================= */
-
+/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
 body {
     background-color: #ffffff;
     color: #212529;
@@ -22,10 +19,6 @@ a {
     max-width: 960px;
 }
 
-/* =========================
-   NAVBAR
-   ========================= */
-
 .navbar-dark .navbar-nav .nav-link {
     color: #ffa040;
 }
@@ -33,10 +26,6 @@ a {
     .navbar-dark .navbar-nav .nav-link:hover {
         color: #ff6f00;
     }
-
-/* =========================
-   CARDS / TABLES (LIGHT)
-   ========================= */
 
 .card {
     background-color: #ffffff;
@@ -52,27 +41,15 @@ a {
     color: #212529;
 }
 
-/* =========================
-   SLIDER / HOME
-   ========================= */
-
 .carousel-item .card {
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* =========================
-   FOOTER
-   ========================= */
-
 footer {
     background-color: #f8f9fa;
     font-size: 0.9rem;
 }
-
-/* =========================
-   NEWSLETTER
-   ========================= */
 
 .newsletter-box {
     display: flex;
@@ -93,10 +70,6 @@ footer {
         padding: 6px 16px;
     }
 
-/* =========================
-   BUTTONS
-   ========================= */
-
 .btn-primary,
 .btn-success {
     background-color: #ff6f00;
@@ -108,10 +81,6 @@ footer {
         background-color: #ffa040;
         border-color: #ffa040;
     }
-
-/* =========================
-   FAQ (LIGHT)
-   ========================= */
 
 .faq-list {
     max-width: 800px;
@@ -143,28 +112,21 @@ footer {
     transition: transform 0.3s ease;
 }
 
-/* =========================
-   DARK THEME (ONLY WHEN ACTIVE)
-   ========================= */
-
 body.dark-theme {
     background-color: #121212;
     color: #e0e0e0;
 }
 
-    /* Containers */
     body.dark-theme .navbar,
     body.dark-theme footer {
         background-color: #1f1f1f !important;
     }
 
-    /* Links */
     body.dark-theme a,
     body.dark-theme .nav-link {
         color: #bbbbbb !important;
     }
 
-    /* Cards / Tables / Forms */
     body.dark-theme .card,
     body.dark-theme .table,
     body.dark-theme .list-group-item,
@@ -174,19 +136,16 @@ body.dark-theme {
         color: #e0e0e0;
     }
 
-    /* Muted text */
     body.dark-theme .text-muted {
         color: #aaaaaa !important;
     }
 
-    /* Buttons */
     body.dark-theme .btn-primary {
         background-color: #bb86fc;
         border-color: #bb86fc;
         color: #121212;
     }
 
-    /* Accordion */
     body.dark-theme .accordion-button {
         background-color: #1f1f1f;
         color: #e0e0e0;
@@ -196,11 +155,6 @@ body.dark-theme {
             background-color: #333333;
             color: #ffffff;
         }
-
-
-    /* ===============================
-   FAQ + RULES – DARK MODE FIX
-   =============================== */
 
     body.dark-theme .faq-item {
         background-color: #1f1f1f;
@@ -221,15 +175,10 @@ body.dark-theme {
         background-color: #2a2a2a;
     }
 
-/* Home slider image sizing */
 .home-slider-img {
     max-height: 250px;
     object-fit: cover;
 }
-
-/* ============================
-   ADMIN DASHBOARD CARDS
-   ============================ */
 
 .dashboard-card {
     border-radius: 16px;
@@ -284,7 +233,6 @@ body.dark-theme .table {
     --bs-table-hover-color: #fff;
 }
 
-/* DARK MODE - BOOTSTRAP MODAL FIX */
 body.dark-theme .modal-content {
     background-color: #1f1f1f;
     color: #e0e0e0;

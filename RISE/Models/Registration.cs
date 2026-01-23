@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RISE.Models
@@ -19,18 +20,16 @@ namespace RISE.Models
         [Required]
         public string Category { get; set; } = string.Empty;
 
-        // ===== RELAZIONI =====
-
         [Required]
         public int CompetitionId { get; set; }
 
         [ForeignKey(nameof(CompetitionId))]
-        public Competition? Competition { get; set; }   // ✅ nullable
+        public Competition? Competition { get; set; }
 
-        public int? UserId { get; set; }                  // ✅ nullable
+        public int? UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        public User? User { get; set; }                   // ✅ nullable
+        public User? User { get; set; }
 
         public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
         public bool Approved { get; set; } = false;

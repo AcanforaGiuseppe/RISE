@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 using RISE.Models;
 using RISE.Models.Admin;
@@ -20,15 +21,14 @@ namespace RISE.Areas.Admin.Controllers
             var now = DateTime.UtcNow;
 
             var users = _db.Users
-                .OrderByDescending(u => u.CreatedAt)
-                .ToList();
+                     .OrderByDescending(u => u.CreatedAt)
+                     .ToList();
 
-            // Retention "semplice": returning = utenti con >=2 registrations approvate
             var approvedRegs = _db.Registrations.Where(r => r.Approved && r.UserId != null).ToList();
             var countsByUser = approvedRegs
-                .GroupBy(r => r.UserId!.Value)
-                .Select(g => g.Count())
-                .ToList();
+                            .GroupBy(r => r.UserId!.Value)
+                            .Select(g => g.Count())
+                            .ToList();
 
             var returningUsers = countsByUser.Count(x => x > 1);
 
@@ -43,16 +43,17 @@ namespace RISE.Areas.Admin.Controllers
             return View(model);
         }
 
-        // ========================= DETAILS =========================
         [HttpGet]
         public IActionResult Details(int id)
         {
             var user = _db.Users.FirstOrDefault(u => u.Id == id);
-            if(user == null) return NotFound();
+
+            if(user == null)
+                return NotFound();
+
             return View(user);
         }
 
-        // ========================= CREATE =========================
         [HttpGet]
         public IActionResult Create()
         {
@@ -63,7 +64,6 @@ namespace RISE.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(User model)
         {
-            // Normalizzazione
             model.Email = (model.Email ?? "").Trim().ToLowerInvariant();
             model.FullName = model.FullName?.Trim();
             model.Country = model.Country?.Trim().ToLowerInvariant();
@@ -87,7 +87,6 @@ namespace RISE.Areas.Admin.Controllers
             else
                 model.PasswordHash = string.Empty;
 
-            // Orario locale corretto
             model.CreatedAt = DateTime.Now;
 
             _db.Users.Add(model);
@@ -96,7 +95,6 @@ namespace RISE.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // ========================= EDIT =========================
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -109,7 +107,6 @@ namespace RISE.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(User model)
         {
-            // Normalizzazione
             model.Email = (model.Email ?? "").Trim().ToLowerInvariant();
             model.FullName = model.FullName?.Trim();
             model.Country = model.Country?.Trim().ToLowerInvariant();
@@ -146,13 +143,14 @@ namespace RISE.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // ========================= DELETE =========================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             var u = _db.Users.Find(id);
-            if(u == null) return NotFound();
+
+            if(u == null)
+                return NotFound();
 
             if(string.Equals(u.Role, "Admin", StringComparison.OrdinalIgnoreCase))
             {

@@ -1,4 +1,5 @@
-﻿namespace RISE.Models.Admin
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+namespace RISE.Models.Admin
 {
     public class AdminDashboardViewModel
     {

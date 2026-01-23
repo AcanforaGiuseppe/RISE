@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 using RISE.Security;
 
@@ -18,14 +19,13 @@ namespace RISE.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var list = _context.Registrations
-                .Where(r => !r.Approved)
-                .OrderByDescending(r => r.RegisteredAt)
-                .ToList();
+                    .Where(r => !r.Approved)
+                    .OrderByDescending(r => r.RegisteredAt)
+                    .ToList();
 
             return View(list);
         }
 
-        // ===================== APPROVA =====================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Approve(int id)
@@ -35,12 +35,10 @@ namespace RISE.Areas.Admin.Controllers
 
             var email = reg.Email.Trim().ToLowerInvariant();
 
-            // 1) controllo se l'utente esiste già
             var user = _context.Users.FirstOrDefault(u => u.Email == email);
 
             if(user == null)
             {
-                // 2) creazione nuovo user
                 user = new Models.User
                 {
                     Email = reg.Email,
@@ -48,7 +46,6 @@ namespace RISE.Areas.Admin.Controllers
                     Country = reg.Country,
                     City = reg.City,
                     Category = reg.Category,
-
                     PasswordHash = PasswordHasher.Hash("changeme"),
                     Role = "User",
                     CreatedAt = DateTime.Now
@@ -58,7 +55,6 @@ namespace RISE.Areas.Admin.Controllers
                 _context.SaveChanges();
             }
 
-            // 3) collegamento registration -> user
             reg.UserId = user.Id;
             reg.Approved = true;
 
@@ -67,13 +63,14 @@ namespace RISE.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // ===================== RIFIUTA =====================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Reject(int id)
         {
             var reg = _context.Registrations.Find(id);
-            if(reg == null) return NotFound();
+
+            if(reg == null)
+                return NotFound();
 
             _context.Registrations.Remove(reg);
             _context.SaveChanges();

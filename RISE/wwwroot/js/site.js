@@ -1,6 +1,6 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+document.addEventListener('DOMContentLoaded', function () {
 
-    // NEWS CAROUSEL
     const newsCarousel = document.querySelector('#newsCarousel');
     if (newsCarousel) {
         new bootstrap.Carousel(newsCarousel, {
@@ -9,7 +9,6 @@
         });
     }
 
-    // RESULTS MODAL
     const modal = document.getElementById('resultsModal');
     if (!modal) return;
 
@@ -25,8 +24,6 @@
         const resultsDiv = row.querySelector('.competition-results');
 
         document.getElementById('resultsModalTitle').innerText = title;
-        document.getElementById('resultsModalBody').innerHTML =
-            resultsDiv ? resultsDiv.innerHTML : '<em>No results available</em>';
+        document.getElementById('resultsModalBody').innerHTML = resultsDiv ? resultsDiv.innerHTML : '<em>No results available</em>';
     });
-
 });

@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using System.Security.Cryptography;
 using System.Text;
 
 namespace RISE.Security
@@ -9,6 +10,7 @@ namespace RISE.Security
         {
             using var sha = SHA256.Create();
             var bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(password));
+
             return Convert.ToBase64String(bytes);
         }
 
@@ -16,5 +18,6 @@ namespace RISE.Security
         {
             return Hash(password) == hash;
         }
+
     }
 }

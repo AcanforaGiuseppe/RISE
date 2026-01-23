@@ -1,4 +1,5 @@
-﻿@model RISE.Models.Competition
+﻿@*  RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe *@
+@model RISE.Models.Competition
 
 @{
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -39,21 +40,13 @@
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
-    <!-- ✅ FIX CRITICO: Results come TESTO REALE -->
     <div class="mb-3">
         <label asp-for="Results" class="form-label"></label>
 
         <textarea asp-for="Results"
                   class="form-control"
                   rows="8"
-                  placeholder="Insert competition results.
-Example:
-MEN OPEN
-1) Mario Rossi
-2) Luca Bianchi
-3) Paolo Verdi
-
-You can also use basic HTML (br, b, ul, li)">
+                  placeholder="Insert competition results.">
         </textarea>
 
         <span asp-validation-for="Results" class="text-danger"></span>

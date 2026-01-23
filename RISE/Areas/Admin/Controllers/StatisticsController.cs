@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 using RISE.Models.Admin;
 
@@ -35,17 +36,18 @@ namespace RISE.Areas.Admin.Controllers
             };
 
             model.UsersPerDay = users
-                .Where(u => u.CreatedAt >= last30)
-                .GroupBy(u => u.CreatedAt.Date)
-                .Select(g => new DailyStat
-                {
-                    Date = g.Key,
-                    Count = g.Count()
-                })
-                .OrderBy(x => x.Date)
-                .ToList();
+                            .Where(u => u.CreatedAt >= last30)
+                            .GroupBy(u => u.CreatedAt.Date)
+                            .Select(g => new DailyStat
+                            {
+                                Date = g.Key,
+                                Count = g.Count()
+                            })
+                            .OrderBy(x => x.Date)
+                            .ToList();
 
             return View(model);
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 
 namespace RISE.Controllers
@@ -15,11 +16,12 @@ namespace RISE.Controllers
         public IActionResult Index()
         {
             var posts = _context.SocialPosts
-                .OrderByDescending(p => p.PostedAt)
-                .Take(12)
-                .ToList();
+                                .OrderByDescending(p => p.PostedAt)
+                                .Take(12)
+                                .ToList();
 
             return View(posts);
         }
+
     }
 }

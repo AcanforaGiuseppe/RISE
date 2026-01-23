@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 using RISE.Models;
 using System.Net.Mail;
@@ -22,7 +23,6 @@ namespace RISE.Controllers
                 _context.NewsletterSubscribers.Add(new NewsletterSubscriber { Email = email });
                 _context.SaveChanges();
 
-                // Invio email di conferma
                 try
                 {
                     using var smtp = new SmtpClient("smtp.gmail.com")
@@ -33,10 +33,11 @@ namespace RISE.Controllers
                     };
                     smtp.Send("TUA_EMAIL@gmail.com", email, "Welcome to RISE Newsletter", "Thanks for subscribing to RISE Calisthenics!");
                 }
-                catch { /* ignora errori in dev */ }
+                catch { }
             }
 
             return RedirectToAction("Index", "Home");
         }
+
     }
 }

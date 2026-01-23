@@ -1,3 +1,4 @@
+/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
 using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 using RISE.Models;
@@ -17,20 +18,16 @@ namespace RISE.Controllers
 
         public IActionResult Index()
         {
-            // --- Slider images ---
             var sliderFolder = Path.Combine(_env.WebRootPath, "images", "slider");
 
-            var images = Directory.Exists(sliderFolder)
-                ? Directory.GetFiles(sliderFolder)
-                    .Select(f => "/images/slider/" + Path.GetFileName(f))
-                    .ToList()
-                : new List<string>();
+            var images = Directory.Exists(sliderFolder) ? Directory.GetFiles(sliderFolder)
+                                  .Select(f => "/images/slider/" + Path.GetFileName(f))
+                                  .ToList() : new List<string>();
 
-            // --- Latest news ---
             var news = _context.News
-                .OrderByDescending(n => n.PostedAt)
-                .Take(3)
-                .ToList();
+                               .OrderByDescending(n => n.PostedAt)
+                               .Take(3)
+                               .ToList();
 
             var model = new HomeIndexViewModel
             {
@@ -61,9 +58,9 @@ namespace RISE.Controllers
         public IActionResult Social()
         {
             var posts = _context.SocialPosts
-                .OrderByDescending(x => x.PostedAt)
-                .Take(6)
-                .ToList();
+                                .OrderByDescending(x => x.PostedAt)
+                                .Take(6)
+                                .ToList();
 
             return View(posts);
         }

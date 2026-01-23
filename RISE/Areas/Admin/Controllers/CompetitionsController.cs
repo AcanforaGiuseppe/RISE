@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 using RISE.Models;
-using System.Linq;
 
 namespace RISE.Areas.Admin.Controllers
 {
@@ -17,22 +17,19 @@ namespace RISE.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: /Admin/Competitions
         public IActionResult Index()
         {
             var competitions = _context.Competitions
-                                .OrderByDescending(c => c.Date)
-                                .ToList();
+                                       .OrderByDescending(c => c.Date)
+                                       .ToList();
             return View(competitions);
         }
 
-        // GET: /Admin/Competitions/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: /Admin/Competitions/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Competition competition)
@@ -41,27 +38,30 @@ namespace RISE.Areas.Admin.Controllers
             {
                 _context.Competitions.Add(competition);
                 _context.SaveChanges();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(competition);
         }
 
-        // GET: /Admin/Competitions/Edit/5
         public IActionResult Edit(int id)
         {
             var competition = _context.Competitions.Find(id);
-            if(competition == null) return NotFound();
+
+            if(competition == null)
+                return NotFound();
 
             return View(competition);
         }
 
-        // POST: /Admin/Competitions/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Competition updated)
         {
             var competition = _context.Competitions.Find(updated.Id);
-            if(competition == null) return NotFound();
+
+            if(competition == null)
+                return NotFound();
 
             if(ModelState.IsValid)
             {
@@ -72,22 +72,26 @@ namespace RISE.Areas.Admin.Controllers
                 competition.Results = updated.Results;
 
                 _context.SaveChanges();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(updated);
         }
 
-        // POST: /Admin/Competitions/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             var competition = _context.Competitions.Find(id);
-            if(competition == null) return NotFound();
+
+            if(competition == null)
+                return NotFound();
 
             _context.Competitions.Remove(competition);
             _context.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

@@ -1,3 +1,0 @@
-1]	Sistema newsletter con un mail server.
-2]	Sezione multilingua (IT/EN).
-3]	Documentazione e README ancora da scrivere.

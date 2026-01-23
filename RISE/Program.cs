@@ -1,31 +1,29 @@
+/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
 using Microsoft.EntityFrameworkCore;
 using RISE.Data;
 using RISE.Models;
 using RISE.Security;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// MVC
 builder.Services.AddControllersWithViews();
 
-// DB InMemory (MVP)
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseInMemoryDatabase("RiseDb"));
+// DB InMemory
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("RiseDb"));
 
 // AUTHENTICATION
 builder.Services.AddAuthentication()
-    .AddCookie("AdminCookie", options =>
-    {
-        options.LoginPath = "/Account/AdminLogin";
-        options.AccessDeniedPath = "/Account/AdminLogin";
-        options.Cookie.Name = "RiseAdminAuth";
-    })
-    .AddCookie("UserCookie", options =>
-    {
-        options.LoginPath = "/Account/UserLogin";
-        options.AccessDeniedPath = "/Account/UserLogin";
-        options.Cookie.Name = "RiseUserAuth";
-    });
+                .AddCookie("AdminCookie", options =>
+                {
+                    options.LoginPath = "/Account/AdminLogin";
+                    options.AccessDeniedPath = "/Account/AdminLogin";
+                    options.Cookie.Name = "RiseAdminAuth";
+                })
+                .AddCookie("UserCookie", options =>
+                {
+                    options.LoginPath = "/Account/UserLogin";
+                    options.AccessDeniedPath = "/Account/UserLogin";
+                    options.Cookie.Name = "RiseUserAuth";
+                });
 
 var app = builder.Build();
 
@@ -44,7 +42,6 @@ using(var scope = app.Services.CreateScope())
         });
         db.SaveChanges();
     }
-
     DbInitializer.Seed(db);
 }
 
@@ -55,13 +52,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // AREA ADMIN
-app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Dashboard}/{id?}");
+app.MapControllerRoute(name: "areas", pattern: "{area:exists}/{controller=Home}/{action=Dashboard}/{id?}");
 
-// PUBLIC
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+// PUBLIC AREA
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

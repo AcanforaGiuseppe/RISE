@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 
 namespace RISE.Areas.Admin.Controllers
@@ -16,15 +17,15 @@ namespace RISE.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var data = _context.Users
-                .Where(u => !string.IsNullOrEmpty(u.Country))
-                .GroupBy(u => u.Country)
-                .Select(g => new
-                {
-                    Country = g.Key,
-                    Count = g.Count()
-                })
-                .OrderByDescending(x => x.Count)
-                .ToList();
+                               .Where(u => !string.IsNullOrEmpty(u.Country))
+                               .GroupBy(u => u.Country)
+                               .Select(g => new
+                               {
+                                   Country = g.Key,
+                                   Count = g.Count()
+                               })
+                               .OrderByDescending(x => x.Count)
+                               .ToList();
 
             return View(data);
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 
 namespace RISE.Controllers
@@ -16,5 +17,6 @@ namespace RISE.Controllers
             var faqs = _context.FAQs.ToList();
             return View(faqs);
         }
+
     }
 }

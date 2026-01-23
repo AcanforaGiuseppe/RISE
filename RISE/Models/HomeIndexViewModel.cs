@@ -1,4 +1,5 @@
-﻿namespace RISE.Models
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+namespace RISE.Models
 {
     public class HomeIndexViewModel
     {

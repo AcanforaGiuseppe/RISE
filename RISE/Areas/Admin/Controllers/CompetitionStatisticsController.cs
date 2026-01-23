@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 using RISE.Models.Admin;
 
@@ -16,11 +17,13 @@ namespace RISE.Areas.Admin.Controllers
         public IActionResult Details(int id)
         {
             var competition = _context.Competitions.FirstOrDefault(c => c.Id == id);
-            if(competition == null) return NotFound();
+
+            if(competition == null)
+                return NotFound();
 
             var regs = _context.Registrations
-                .Where(r => r.CompetitionId == id)
-                .ToList();
+                               .Where(r => r.CompetitionId == id)
+                               .ToList();
 
             var model = new CompetitionStatisticsViewModel
             {
@@ -30,21 +33,22 @@ namespace RISE.Areas.Admin.Controllers
                 ApprovedRegistrations = regs.Count(r => r.Approved),
                 PendingRegistrations = regs.Count(r => !r.Approved),
                 CategoryBreakdown = regs
-                    .GroupBy(r => r.Category)
-                    .ToDictionary(g => g.Key, g => g.Count())
+                                        .GroupBy(r => r.Category)
+                                        .ToDictionary(g => g.Key, g => g.Count())
             };
 
             model.RegistrationsPerDay = regs
-                .GroupBy(r => r.RegisteredAt.Date)
-                .Select(g => new DailyStat
-                {
-                    Date = g.Key,
-                    Count = g.Count()
-                })
-                .OrderBy(x => x.Date)
-                .ToList();
+                                            .GroupBy(r => r.RegisteredAt.Date)
+                                            .Select(g => new DailyStat
+                                            {
+                                                Date = g.Key,
+                                                Count = g.Count()
+                                            })
+                                            .OrderBy(x => x.Date)
+                                            .ToList();
 
             return View(model);
         }
+
     }
 }

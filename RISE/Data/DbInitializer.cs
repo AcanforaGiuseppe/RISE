@@ -1,4 +1,5 @@
-﻿namespace RISE.Data
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+namespace RISE.Data
 {
     public static class DbInitializer
     {

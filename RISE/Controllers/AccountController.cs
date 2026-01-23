@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 using RISE.Security;
@@ -14,7 +15,6 @@ namespace RISE.Controllers
             _db = db;
         }
 
-        // ================= ADMIN LOGIN =================
         [HttpGet]
         public IActionResult AdminLogin() => View();
 
@@ -41,7 +41,6 @@ namespace RISE.Controllers
             return Redirect("/Admin/Dashboard");
         }
 
-        // ================= USER LOGIN =================
         [HttpGet]
         public IActionResult UserLogin() => View();
 
@@ -68,7 +67,6 @@ namespace RISE.Controllers
             return Redirect("/");
         }
 
-        // ================= LOGOUT =================
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
@@ -76,5 +74,6 @@ namespace RISE.Controllers
             await HttpContext.SignOutAsync("UserCookie");
             return Redirect("/");
         }
+
     }
 }

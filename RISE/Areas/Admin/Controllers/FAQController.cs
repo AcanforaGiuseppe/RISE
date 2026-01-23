@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 using RISE.Models;
 
@@ -14,11 +15,9 @@ namespace RISE.Areas.Admin.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-            => View(_context.FAQs.ToList());
+        public IActionResult Index() => View(_context.FAQs.ToList());
 
-        public IActionResult Create()
-            => View(new FAQ());
+        public IActionResult Create() => View(new FAQ());
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -29,13 +28,17 @@ namespace RISE.Areas.Admin.Controllers
 
             _context.FAQs.Add(model);
             _context.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(int id)
         {
             var faq = _context.FAQs.Find(id);
-            if(faq == null) return NotFound();
+
+            if(faq == null)
+                return NotFound();
+
             return View(faq);
         }
 
@@ -48,6 +51,7 @@ namespace RISE.Areas.Admin.Controllers
 
             _context.FAQs.Update(model);
             _context.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -56,10 +60,13 @@ namespace RISE.Areas.Admin.Controllers
         public IActionResult Delete(int id)
         {
             var faq = _context.FAQs.Find(id);
-            if(faq == null) return NotFound();
+
+            if(faq == null)
+                return NotFound();
 
             _context.FAQs.Remove(faq);
             _context.SaveChanges();
+
             return RedirectToAction(nameof(Index));
         }
 

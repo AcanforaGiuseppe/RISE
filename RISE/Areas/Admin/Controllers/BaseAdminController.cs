@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RISE.Areas.Admin.Controllers
@@ -6,6 +7,5 @@ namespace RISE.Areas.Admin.Controllers
     [Area("Admin")]
     [Authorize(AuthenticationSchemes = "AdminCookie", Roles = "Admin")]
     public abstract class BaseAdminController : Controller
-    {
-    }
+    { }
 }

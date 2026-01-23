@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 
 namespace RISE.Areas.Admin.Controllers
@@ -7,7 +8,6 @@ namespace RISE.Areas.Admin.Controllers
     {
         private readonly ApplicationDbContext _db;
         public NewsletterController(ApplicationDbContext db) { _db = db; }
-
         public IActionResult Index() => View(_db.NewsletterSubscribers.OrderByDescending(s => s.SubscribedAt).ToList());
     }
 }

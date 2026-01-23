@@ -1,4 +1,5 @@
-﻿(function () {
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+(function () {
     const DARK_CLASS = 'dark-theme';
     const STORAGE_KEY = 'theme';
     const COOKIE_KEY = 'rise_theme';

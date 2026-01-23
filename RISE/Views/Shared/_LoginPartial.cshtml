@@ -1,4 +1,5 @@
-﻿@if(User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+﻿@*  RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe *@
+@if(User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {
     <li class="nav-item me-2">
         <a class="btn btn-outline-info btn-sm"

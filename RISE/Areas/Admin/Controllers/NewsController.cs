@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 using RISE.Models;
@@ -16,23 +17,20 @@ namespace RISE.Areas.Admin.Controllers
             _db = db;
         }
 
-        // LIST
         public IActionResult Index()
         {
             var items = _db.News
-                .OrderByDescending(n => n.PostedAt)
-                .ToList();
+                     .OrderByDescending(n => n.PostedAt)
+                     .ToList();
 
             return View(items);
         }
 
-        // CREATE (GET)
         public IActionResult Create()
         {
             return View(new News());
         }
 
-        // CREATE (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(News model)
@@ -48,7 +46,6 @@ namespace RISE.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // EDIT (GET)
         public IActionResult Edit(int id)
         {
             var item = _db.News.Find(id);
@@ -58,7 +55,6 @@ namespace RISE.Areas.Admin.Controllers
             return View(item);
         }
 
-        // EDIT (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(News model)
@@ -72,7 +68,6 @@ namespace RISE.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // DELETE
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
@@ -86,5 +81,6 @@ namespace RISE.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

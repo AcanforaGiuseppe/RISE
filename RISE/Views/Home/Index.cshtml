@@ -1,10 +1,10 @@
-﻿@model RISE.Models.HomeIndexViewModel
+﻿@*  RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe *@
+@model RISE.Models.HomeIndexViewModel
 
 @{
     ViewData["Title"] = "Home";
 }
 
-<!-- ================= SLIDER ================= -->
 @if(Model.SliderImages != null && Model.SliderImages.Any())
 {
     <div id="homeSlider" class="carousel slide mb-5" data-bs-ride="carousel" data-bs-interval="10000">
@@ -37,7 +37,6 @@
     </div>
 }
 
-<!-- ================= INTRO ================= -->
 <div class="text-center mb-5">
     <h1 class="fw-bold">RISE – Raw Inner Strength Evolved</h1>
     <p class="lead">
@@ -46,7 +45,6 @@
     </p>
 </div>
 
-<!-- ================= NEWS ================= -->
 <h2 class="mb-4">Latest News</h2>
 
 @if(Model.LatestNews == null || !Model.LatestNews.Any())

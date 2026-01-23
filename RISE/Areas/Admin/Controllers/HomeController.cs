@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RISE.Data;
 using RISE.Models;
@@ -18,7 +19,6 @@ namespace RISE.Areas.Admin.Controllers
             _context = context;
         }
 
-        // Dashboard con conteggi
         [Route("Dashboard")]
         public IActionResult Dashboard()
         {
@@ -33,7 +33,6 @@ namespace RISE.Areas.Admin.Controllers
             return View(model);
         }
 
-        // News CRUD
         public IActionResult News()
         {
             return View(_context.News.OrderByDescending(n => n.PostedAt).ToList());
@@ -49,9 +48,11 @@ namespace RISE.Areas.Admin.Controllers
         {
             if(ModelState.IsValid)
             {
-                news.PostedAt = DateTime.Now; // automatic date
+                news.PostedAt = DateTime.Now;
+
                 _context.News.Add(news);
                 _context.SaveChanges();
+
                 return RedirectToAction("News");
             }
             return View(news);
@@ -77,28 +78,26 @@ namespace RISE.Areas.Admin.Controllers
 
             news.Title = updated.Title;
             news.Content = updated.Content;
+
             _context.SaveChanges();
 
             return RedirectToAction("News");
         }
 
-        // Newsletter Subscribers
         public IActionResult Subscribers()
         {
             var list = _context.NewsletterSubscribers
-                        .OrderByDescending(x => x.SubscribedAt)
-                        .ToList();
+                               .OrderByDescending(x => x.SubscribedAt)
+                               .ToList();
             return View(list);
         }
 
-        // List competitions
         public IActionResult Competitions()
         {
             var list = _context.Competitions.OrderByDescending(c => c.Date).ToList();
             return View(list);
         }
 
-        // Create competition
         public IActionResult CreateCompetition()
         {
             return View();
@@ -111,16 +110,19 @@ namespace RISE.Areas.Admin.Controllers
             {
                 _context.Competitions.Add(competition);
                 _context.SaveChanges();
+
                 return RedirectToAction("Competitions");
             }
             return View(competition);
         }
 
-        // Edit competition
         public IActionResult EditCompetition(int id)
         {
             var comp = _context.Competitions.Find(id);
-            if(comp == null) return NotFound();
+
+            if(comp == null)
+                return NotFound();
+
             return View(comp);
         }
 
@@ -128,62 +130,69 @@ namespace RISE.Areas.Admin.Controllers
         public IActionResult EditCompetition(Competition updated)
         {
             var comp = _context.Competitions.Find(updated.Id);
-            if(comp == null) return NotFound();
+
+            if(comp == null)
+                return NotFound();
 
             comp.Title = updated.Title;
             comp.Location = updated.Location;
             comp.Date = updated.Date;
             comp.Description = updated.Description;
-            comp.Results = updated.Results; // Aggiornamento results
+            comp.Results = updated.Results;
 
             _context.SaveChanges();
+
             return RedirectToAction("Competitions");
         }
 
-        // Delete competition
         [HttpPost]
         public IActionResult DeleteCompetition(int id)
         {
             var comp = _context.Competitions.Find(id);
-            if(comp == null) return NotFound();
+
+            if(comp == null)
+                return NotFound();
 
             _context.Competitions.Remove(comp);
             _context.SaveChanges();
             return RedirectToAction("Competitions");
         }
 
-        // View all registrations
         public IActionResult Registrations()
         {
             var list = _context.Registrations
-                        .OrderByDescending(r => r.RegisteredAt)
-                        .ToList();
+                               .OrderByDescending(r => r.RegisteredAt)
+                               .ToList();
             return View(list);
         }
 
-        // Approve registration
         public IActionResult ApproveRegistration(int id)
         {
             var reg = _context.Registrations.Find(id);
-            if(reg == null) return NotFound();
+
+            if(reg == null)
+                return NotFound();
 
             reg.Approved = true;
+
             _context.SaveChanges();
+
             return RedirectToAction("Registrations");
         }
 
-        // Delete registration
         [HttpPost]
         public IActionResult DeleteRegistration(int id)
         {
             var reg = _context.Registrations.Find(id);
-            if(reg == null) return NotFound();
+
+            if(reg == null)
+                return NotFound();
 
             _context.Registrations.Remove(reg);
             _context.SaveChanges();
+
             return RedirectToAction("Registrations");
         }
-
 
     }
 }

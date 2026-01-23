@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/* RISE PROJECT - 2026 - COPYRIGHT by Acanfora Giuseppe */
+using Microsoft.AspNetCore.Mvc;
 
 namespace RISE.Areas.Admin.Controllers
 {
@@ -36,7 +37,8 @@ namespace RISE.Areas.Admin.Controllers
 
             foreach(var file in files)
             {
-                if(file.Length == 0) continue;
+                if(file.Length == 0)
+                    continue;
 
                 var fileName = Path.GetFileName(file.FileName);
                 var filePath = Path.Combine(folder, fileName);
@@ -62,5 +64,6 @@ namespace RISE.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
     }
 }
